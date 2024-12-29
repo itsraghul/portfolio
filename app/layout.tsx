@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
-import Logo from "../assets/images/PortfolioLogo.png"
 
 
 const geistSans = localFont({
@@ -29,12 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href={Logo.src} style={{ borderRadius: "25%" }} sizes="any" />
+      <link rel="icon" href={"/images/PortfolioLogo.png"} sizes="any" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <NavBar />
-        <main className="flex-grow container mx-auto px-4 py-6 mt-16">
+        <main className="flex-grow container mx-auto px-4 py-6 mt-16 flex">
           {children}
         </main>
         <Footer />
