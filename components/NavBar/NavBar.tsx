@@ -2,8 +2,10 @@
 
 
 import { SunIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
+import Logo from "../../assets/images/PortfolioLogo-transparent.png"
 
 const pageLinks: string[] = ["experience", "projects", "about", "others"]
 
@@ -12,7 +14,12 @@ const NavBar = () => {
         <nav className='py-4 shadow-md fixed top-0 left-0 w-full z-50 bg-inherit'>
             <div className='container mx-auto flex justify-between items-center px-4'>
                 <Link href={`/`} className='cursor-pointer font-extrabold italic'>
-                    RS
+                    <Image
+                        src={Logo}
+                        alt={"Raghul Logo"}
+                        width={30}
+                        height={30}
+                    />
                 </Link>
                 <ul className='flex-row flex gap-4 items-center justify-evenly'>
                     <>
