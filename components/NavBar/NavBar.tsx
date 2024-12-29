@@ -5,7 +5,7 @@ import { SunIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
-import Logo from "../../assets/images/PortfolioLogo-transparent.png"
+import Logo from "../../public/images/PortfolioLogo-transparent.png"
 
 const pageLinks: string[] = ["experience", "projects", "about", "others"]
 
