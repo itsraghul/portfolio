@@ -91,12 +91,17 @@ const config: Config = {
 					'0%, 100%': { 'border-color': 'transparent' },
 					'50%': { 'border-color': 'black' },
 				},
+				fadeIn: {
+					'0%': { 'opacity': '0' },
+					'100%': { 'opacity': '1' }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'typing': 'typing 3s steps(20, end)',
 				'blink': 'blink 0.7s step-end infinite',
+				'fadeIn': 'fadeIn 6s'
 			}
 		}
 	},
