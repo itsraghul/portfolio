@@ -8,7 +8,7 @@ const ExperiencePage = () => {
 
     return (
         <div className="max-w-4xl mx-auto mt-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">My Experience</h2>
+            <h2 className="text-2xl font-semibold font-mono  text-gray-900 mb-4">My Experience</h2>
             <div className="relative border-l border-gray-300">
                 {experience.map((exp, index) => (
                     <div
@@ -26,12 +26,12 @@ const ExperiencePage = () => {
                             <CircleSlash2Icon className="w-5 h-5 bg-white" />
                         </div>
                         <div className="ml-6">
-                            <h3 className="text-lg font-medium text-gray-800">{exp.title}</h3>
-                            <span className="text-md text-gray-500">{exp.date}</span>
+                            <h3 className="text-lg font-bold text-gray-800 font-mono ">{exp.title}</h3>
+                            <span className="text-md text-gray-500 font-mono ">{exp.date}</span>
                             <ul>
                                 {
                                     exp.description.map((description, index) => (
-                                        <li className="text-md text-gray-600 list-none" key={index}>{description}</li>
+                                        <li className="text-md text-gray-800 list-none font-mono" key={index}>{description}</li>
                                     ))
                                 }
                             </ul>

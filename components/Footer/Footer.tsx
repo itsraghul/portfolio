@@ -3,7 +3,8 @@
 
 import React from 'react'
 import { Button } from '../ui/button';
-import { GithubIcon, LinkedinIcon } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, Mail } from 'lucide-react';
+import { openLink } from '@/lib/utils';
 
 type contactLink = {
     link: string
@@ -17,27 +18,24 @@ const contactLinks: contactLink[] = [
     {
         link: "https://www.github.com/itsraghul",
         icon: <GithubIcon />
+    },
+    {
+        link: "mailto:raghul2521@gmail.com",
+        icon: <Mail />
     }
 ]
 const Footer = () => {
-
-    const onContactClick = (link: string) => {
-        window.open(link, "_blank");
-    }
     return (
         <footer className="flex items-center justify-center p-2 gap-2 h-[50px]">
             <>
                 {
                     contactLinks.map((contact, index) => (
-                        <Button variant={'ghost'} key={index} onClick={() => onContactClick(contact.link)}>
+                        <Button variant={'ghost'} key={index} onClick={() => openLink(contact.link)}>
                             {contact.icon}
                         </Button>
                     ))
                 }
             </>
-            {/* <Button variant={'ghost'}>
-                <Mail />
-            </Button> */}
         </footer>
     )
 }
