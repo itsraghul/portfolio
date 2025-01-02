@@ -33,14 +33,14 @@ const HomeIntro = () => {
     return (
         <div className="flex flex-col mt-8 items-center justify-center">
             <h1 className="font-mono text-6xl mb-6">
-                <span className={cn("inline-block overflow-hidden whitespace-nowrap  border-black animate-typing animate-blink",
+                <span className={cn("inline-block overflow-hidden whitespace-nowrap  border-primary animate-typing animate-blink",
                     hideFirstCursor ? "border-transparent" : "border-r-4"
                 )}>
                     {HOMEPAGE_INFO.GREETING}
                 </span>
             </h1>
             {showSecond && <h1 className="font-mono text-6xl mb-6">
-                <span className={cn("inline-block overflow-hidden leading-[1.5em] whitespace-nowrap border-black animate-typing animate-blink",
+                <span className={cn("inline-block overflow-hidden leading-[1.5em] whitespace-nowrap border-primary animate-typing animate-blink",
                     hideSecondCursor ? "border-transparent" : "border-r-4"
                 )}>
                     {HOMEPAGE_INFO.NAME_INFO}
