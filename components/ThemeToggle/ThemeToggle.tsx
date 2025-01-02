@@ -5,27 +5,22 @@ import { useTheme } from 'next-themes'
 import React from 'react'
 import { Button } from '../ui/button';
 
-const ThemeRegistry: Record<string, LucideIcon> = {
-    'light': SunIcon,
-    'dark': MoonIcon
-}
 const ThemeToggle = () => {
-    const { setTheme, theme } = useTheme();
+    const { setTheme, theme = "light" } = useTheme();
 
-    const onSetTheme = (theme: string | undefined) => {
+    const onSetTheme = (theme: string) => {
         if (theme === "light") {
             setTheme("dark");
         } else {
             setTheme("light");
         }
     }
-    const ICON = theme ? ThemeRegistry[theme] : ThemeRegistry['light'];
     return (
-        <>
-            <Button variant={'ghost'} onClick={() => onSetTheme(theme)}>
-                <ICON size={16} />
-            </Button>
-        </>
+        <Button variant={'ghost'} onClick={() => onSetTheme(theme)}>
+            {
+                theme === "light" ? <SunIcon size={16} /> : <MoonIcon size={16} />
+            }
+        </Button>
     )
 }
 
