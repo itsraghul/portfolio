@@ -1,3 +1,5 @@
+"use client";
+
 import { LucideIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes'
 import React from 'react'
