@@ -2,6 +2,13 @@ import { Project } from "@/types";
 
 export const PROJECTS: Project[] = [
     {
+        name: "DataForge - Through WebScrape workflow",
+        stack: "Next.js | Puppeteer | Prisma | OpenAI",
+        description: "A dataset creator through webscrape workflow. Currently use AI to extract data in html and send data through webhook. Can also schedule the Workflows to run appropriately.",
+        githubLink: "https://github.com/itsraghul/FlowBuilder",
+        websiteLink: "https://flow-data-forge.vercel.app/"
+    },
+    {
         name: "Hearty-Foods - Food delivery app",
         stack: "Next.js | MongoDB | Cloudinary | Paypal API",
         description: "A food order and delivery application that allows users to order food items and pay using paypal. The admin can manage the users and create new orders and live track delivery status and update them accordingly.",
