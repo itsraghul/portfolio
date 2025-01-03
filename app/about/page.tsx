@@ -1,6 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { openLink } from '@/lib/utils'
-import { ArrowDown, FileText } from 'lucide-react'
+import ResumeButton from '@/components/ResumeButton/ResumeButton'
+import { ArrowDown } from 'lucide-react'
 import React from 'react'
 
 const page = () => {
@@ -13,10 +12,7 @@ const page = () => {
             <span>
                 or through my
             </span>
-            <Button variant={'outline'} onClick={() => openLink(process.env.RESUME_LINK!)} >
-                <FileText size={16} />
-                Resume
-            </Button>
+            <ResumeButton fileLink={process.env.RESUME_LINK!} />
         </div>
     )
 }
