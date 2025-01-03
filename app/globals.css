@@ -92,3 +92,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Project card css */
+.projects:hover > .project:not(:hover) {
+  filter: blur(10px);
+  transform: scale(0.9);
+}

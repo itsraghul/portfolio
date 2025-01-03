@@ -14,7 +14,7 @@ import React from 'react'
 const ProjectCard = ({ project }: { project: Project }) => {
     const { name, githubLink, websiteLink, stack, description } = project;
 
-    return <Card className='w-[480px] h-[250px] flex flex-col box-content overflow-hidden'>
+    return <Card className='w-[480px] h-[250px] flex flex-col box-content overflow-hidden project hover:scale-110 transition-transform'>
         <CardHeader className='h-[50px]'>
             <CardTitle className='font-mono font-semibold'>
                 {name}
