@@ -14,7 +14,7 @@ import React from 'react'
 const ProjectCard = ({ project }: { project: Project }) => {
     const { name, githubLink, websiteLink, stack, description } = project;
 
-    return <Card className='w-[480px] h-[250px] flex flex-col box-content overflow-hidden project hover:scale-110 transition-transform'>
+    return <Card className='w-[480px] h-[250px] flex bg-secondary flex-col box-content overflow-hidden project hover:scale-110 transition-transform'>
         <CardHeader className='h-[50px]'>
             <CardTitle className='font-mono font-semibold'>
                 {name}
@@ -28,10 +28,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
         </CardContent>
         <CardFooter className='flex  w-full h-[50px]'>
             <div className='flex flex-row justify-normal gap-4 w-full'>
-                {githubLink && githubLink.length && <Button onClick={() => openLink(githubLink)} variant="outline" size={'default'} className='font-mono' title='CODE'>
+                {githubLink && githubLink.length && <Button onClick={() => openLink(githubLink)} variant={"outline"} size={'default'} className='font-mono hover:bg-muted-foreground/20 border-secondary-foreground' title='CODE'>
                     <Code2Icon /> GITHUB
                 </Button>}
-                {websiteLink && websiteLink.length && <Button onClick={() => openLink(websiteLink)} variant="outline" size={'default'} className='font-mono' title='WEBSITE'>
+                {websiteLink && websiteLink.length && <Button onClick={() => openLink(websiteLink)} variant="outline" size={'default'} className='font-mono hover:bg-muted-foreground/20 border-secondary-foreground' title='WEBSITE'>
                     <EarthIcon /> WEBSITE
                 </Button>}
             </div>
