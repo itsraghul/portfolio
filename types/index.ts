@@ -7,3 +7,11 @@ export type Project = {
     githubLink?: string;
     websiteLink?: string;
 }
+
+
+export type Card = {
+    index: number;
+    color: string;
+    name: string;
+    logo: string;
+}
