@@ -144,3 +144,46 @@ body {
   filter: blur(10px);
   transform: scale(0.9);
 }
+
+@layer components {
+  .skills-wrapper {
+    @apply w-full h-full relative flex items-center justify-center overflow-hidden;
+  }
+  .inner {
+    --w: 150px;
+    --h: 150px;
+    --translate-z: calc((var(--w) + var(--h)) + 0px);
+    --rotate-x: -15deg;
+    --perspective: 1000px;
+    @apply absolute z-10;
+    width: var(--w);
+    height: var(--h);
+    top: 25%;
+    left: calc(50% - (var(--w) / 2) - 2.5px);
+    transform-style: preserve-3d;
+    transform: perspective(var(--perspective));
+    animation: rotating 20s linear infinite;
+  }
+  @keyframes rotating {
+    from {
+      transform: perspective(var(--perspective)) rotateX(var(--rotate-x)) rotateY(0);
+    }
+    to {
+      transform: perspective(var(--perspective)) rotateX(var(--rotate-x)) rotateY(1turn);
+    }
+  }
+  .skill-card {
+    @apply absolute inset-0 border rounded-lg overflow-hidden;
+    border: 2px solid rgba(var(--color-card));
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translate-z));
+  }
+  .img {
+    @apply w-full h-full object-cover;
+    background: radial-gradient(
+      circle,
+      rgba(var(--color-card), 0.2) 0%,
+      rgba(var(--color-card), 0.6) 80%,
+      rgba(var(--color-card), 0.9) 100%
+    );
+  }
+}
