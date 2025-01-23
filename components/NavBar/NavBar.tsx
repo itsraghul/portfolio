@@ -8,7 +8,7 @@ import LogoDark from "../../public/images/PortfolioLogoDark-transparent.png";
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { useTheme } from 'next-themes';
 
-const pageLinks: string[] = ["experience", "projects", "about", "others"]
+const pageLinks: string[] = ["experience", "projects", "about"]
 
 const NavBar = () => {
     const { theme } = useTheme();
