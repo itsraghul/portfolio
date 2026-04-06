@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 import AppProvider from "@/components/providers/AppProvider";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -36,8 +37,9 @@ export default function RootLayout({
       >
         <AppProvider>
           <>
+            <ScrollProgress />
             <NavBar />
-            <main className="flex-grow max-w-4xl container mx-auto px-4 py-6 mt-16 flex">
+            <main className="flex-grow mx-auto px-4 py-6 mt-16 flex w-full">
               {children}
             </main>
             <Footer />
