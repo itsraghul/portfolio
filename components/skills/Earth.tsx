@@ -29,7 +29,11 @@ const glowFragmentShader = `
   }
 `;
 
-export default function Earth() {
+interface EarthProps {
+  isDark?: boolean;
+}
+
+export default function Earth({ isDark = true }: EarthProps) {
   const earthRef = useRef<THREE.Mesh>(null);
 
   const [colorMap, bumpMap] = useTexture([
@@ -39,10 +43,10 @@ export default function Earth() {
 
   const glowUniforms = useMemo(
     () => ({
-      glowColor: { value: new THREE.Color("#60a5fa") },
-      intensity: { value: 0.6 },
+      glowColor: { value: new THREE.Color(isDark ? "#60a5fa" : "#94a3b8") },
+      intensity: { value: isDark ? 0.6 : 0.3 },
     }),
-    []
+    [isDark]
   );
 
   useFrame((_, delta) => {

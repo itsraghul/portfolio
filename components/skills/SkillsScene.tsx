@@ -3,6 +3,7 @@
 import { useState, useCallback, useMemo, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars, Line } from "@react-three/drei";
+import { useTheme } from "next-themes";
 import * as THREE from "three";
 import { skills } from "@/constants/about";
 import SkillCard3D from "./SkillCard3D";
@@ -60,6 +61,8 @@ function parseRgb(rgb: string): string {
 
 export default function SkillsScene() {
   const [selected, setSelected] = useState<Card | null>(null);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const orbitConfigs = useMemo(
     () => generateOrbitConfigs(skills.length),
@@ -76,24 +79,32 @@ export default function SkillsScene() {
     <div className="relative w-full h-full rounded-xl overflow-hidden">
       <Canvas
         camera={{ position: [0, 3, 14], fov: 45 }}
-        style={{ background: "radial-gradient(ellipse at center, #0f172a 0%, #020617 70%, #000000 100%)" }}
+        style={{
+          background: isDark
+            ? "radial-gradient(ellipse at center, #0f172a 0%, #020617 70%, #000000 100%)"
+            : "radial-gradient(ellipse at center, #f8fafc 0%, #e2e8f0 70%, #cbd5e1 100%)",
+        }}
       >
         <Suspense fallback={null}>
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 5, 10]} intensity={0.8} />
-        <pointLight position={[-8, -5, -8]} intensity={0.3} color="#6366f1" />
+        <ambientLight intensity={isDark ? 0.4 : 0.6} />
+        <directionalLight position={[10, 5, 10]} intensity={isDark ? 0.8 : 1.0} />
+        {isDark && (
+          <pointLight position={[-8, -5, -8]} intensity={0.3} color="#6366f1" />
+        )}
 
-        <Stars
-          radius={60}
-          depth={60}
-          count={5000}
-          factor={2}
-          saturation={0}
-          fade
-          speed={0.5}
-        />
+        {isDark && (
+          <Stars
+            radius={60}
+            depth={60}
+            count={5000}
+            factor={2}
+            saturation={0}
+            fade
+            speed={0.5}
+          />
+        )}
 
-        <Earth />
+        <Earth isDark={isDark} />
 
         {skills.map((skill, i) => {
           const config = orbitConfigs[i];
