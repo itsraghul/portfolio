@@ -1,12 +1,15 @@
-import HomeIntro from "@/components/HomeIntro/HomeIntro";
-
-
+import HeroSection from "@/components/landing/HeroSection";
+import StatsBar from "@/components/landing/StatsBar";
+import FeaturedWork from "@/components/landing/FeaturedWork";
+import QuickLinks from "@/components/landing/QuickLinks";
 
 export default function Home() {
-
   return (
-    <div className="max-w-4xl mx-auto mt-8 flex">
-      <HomeIntro />
+    <div className="w-full">
+      <HeroSection />
+      <StatsBar />
+      <FeaturedWork />
+      <QuickLinks />
     </div>
   );
 }
