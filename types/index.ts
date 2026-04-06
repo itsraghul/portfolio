@@ -6,6 +6,8 @@ export type Project = {
     description: string;
     githubLink?: string;
     websiteLink?: string;
+    category?: string;
+    featured?: boolean;
 }
 
 

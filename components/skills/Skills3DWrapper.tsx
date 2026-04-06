@@ -7,7 +7,7 @@ import SkillsFallback from "./SkillsFallback";
 const SkillsScene = dynamic(() => import("./SkillsScene"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[500px] sm:h-[600px] flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center">
       <div className="animate-pulse text-muted-foreground font-mono text-sm">
         Loading 3D scene...
       </div>
@@ -35,7 +35,7 @@ export default function Skills3DWrapper() {
 
   if (supportsWebGL === null) {
     return (
-      <div className="w-full h-[500px] sm:h-[600px] flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center">
         <div className="animate-pulse text-muted-foreground font-mono text-sm">
           Loading...
         </div>

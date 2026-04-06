@@ -7,9 +7,11 @@ import { fadeInUp, DEFAULT_TRANSITION } from "@/lib/animations";
 
 export default function AboutPage() {
   return (
-    <div className="max-w-5xl mx-auto mt-8 px-4">
+    <div className="w-screen h-[calc(100vh-4rem)] -mx-4 -mt-6 relative overflow-hidden">
+      <Skills3DWrapper />
+
       <motion.div
-        className="mb-8 text-center"
+        className="absolute top-6 left-0 right-0 z-10 text-center pointer-events-none"
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
@@ -19,22 +21,20 @@ export default function AboutPage() {
           Skills
         </h2>
         <div className="mt-3 mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-primary/60 to-primary/20" />
-        <p className="mt-4 text-sm text-muted-foreground font-mono">
+        <p className="mt-2 text-sm text-muted-foreground font-mono">
           Drag to orbit. Click a card to inspect.
         </p>
       </motion.div>
 
-      <Skills3DWrapper />
-
       <motion.div
-        className="flex items-center justify-center gap-3 mt-8 pb-8"
+        className="absolute bottom-6 left-0 right-0 z-10 flex items-center justify-center gap-3 pointer-events-auto"
         initial="hidden"
-        whileInView="visible"
+        animate="visible"
         variants={fadeInUp}
-        transition={DEFAULT_TRANSITION}
+        transition={{ ...DEFAULT_TRANSITION, delay: 0.3 }}
       >
         <span className="font-mono text-sm text-muted-foreground">
-          To know more about me, check the social links below or
+          Check the social links or
         </span>
         <ResumeButton fileLink={process.env.NEXT_PUBLIC_RESUME_LINK ?? ""} />
       </motion.div>
