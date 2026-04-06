@@ -1,34 +1,70 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stars, Environment } from "@react-three/drei";
+import { OrbitControls, Stars, Line } from "@react-three/drei";
+import * as THREE from "three";
 import { skills } from "@/constants/about";
 import SkillCard3D from "./SkillCard3D";
 import SkillDetailPanel from "./SkillDetailPanel";
+import Earth from "./Earth";
 import type { Card } from "@/types";
 
-/** Fibonacci sphere: distributes N points evenly on a sphere of given radius */
-function fibonacciSphere(count: number, radius: number): [number, number, number][] {
-  const points: [number, number, number][] = [];
-  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < count; i++) {
-    const y = 1 - (i / (count - 1)) * 2;
-    const r = Math.sqrt(1 - y * y);
-    const theta = goldenAngle * i;
-    points.push([
-      Math.cos(theta) * r * radius,
-      y * radius,
-      Math.sin(theta) * r * radius,
-    ]);
-  }
-  return points;
+interface OrbitConfig {
+  radius: number;
+  speed: number;
+  inclination: number;
+  phaseOffset: number;
 }
 
-const positions = fibonacciSphere(skills.length, 5);
+/** Generate orbit configurations across 3 bands */
+function generateOrbitConfigs(count: number): OrbitConfig[] {
+  const bands = [
+    { min: 3.5, max: 4.2 },
+    { min: 5.0, max: 5.5 },
+    { min: 6.2, max: 6.8 },
+  ];
+
+  return Array.from({ length: count }, (_, i) => {
+    const bandIndex = Math.floor(i / 4) % 3;
+    const posInBand = i % 4;
+    const band = bands[bandIndex];
+    const radius = band.min + (posInBand / 3) * (band.max - band.min);
+
+    return {
+      radius,
+      speed: 0.35 / Math.sqrt(radius / 3.5),
+      inclination: ((i / (count - 1)) - 0.5) * Math.PI * 0.45,
+      phaseOffset: (i / count) * Math.PI * 2,
+    };
+  });
+}
+
+/** Generate points for an orbit ring in XZ plane */
+function orbitRingPoints(radius: number): THREE.Vector3[] {
+  const segments = 64;
+  return Array.from({ length: segments + 1 }, (_, i) => {
+    const angle = (i / segments) * Math.PI * 2;
+    return new THREE.Vector3(
+      Math.cos(angle) * radius,
+      0,
+      Math.sin(angle) * radius
+    );
+  });
+}
+
+function parseRgb(rgb: string): string {
+  const [r, g, b] = rgb.split(",").map((s) => s.trim());
+  return `rgb(${r}, ${g}, ${b})`;
+}
 
 export default function SkillsScene() {
   const [selected, setSelected] = useState<Card | null>(null);
+
+  const orbitConfigs = useMemo(
+    () => generateOrbitConfigs(skills.length),
+    []
+  );
 
   const handleSelect = useCallback((skill: Card) => {
     setSelected((prev) => (prev?.index === skill.index ? null : skill));
@@ -39,34 +75,57 @@ export default function SkillsScene() {
   return (
     <div className="relative w-full h-full">
       <Canvas
-        camera={{ position: [0, 0, 12], fov: 45 }}
+        camera={{ position: [0, 3, 14], fov: 45 }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -5]} intensity={0.5} color="#6366f1" />
-        <pointLight position={[0, -10, 5]} intensity={0.3} color="#8b5cf6" />
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[10, 5, 10]} intensity={0.8} />
+        <pointLight position={[-8, -5, -8]} intensity={0.3} color="#6366f1" />
 
-        <Stars radius={50} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
+        <Stars
+          radius={60}
+          depth={60}
+          count={5000}
+          factor={2}
+          saturation={0}
+          fade
+          speed={0.5}
+        />
 
-        {skills.map((skill, i) => (
-          <SkillCard3D
-            key={skill.index}
-            skill={skill}
-            position={positions[i]}
-            onSelect={handleSelect}
-          />
-        ))}
+        <Earth />
+
+        {skills.map((skill, i) => {
+          const config = orbitConfigs[i];
+          const ringPts = orbitRingPoints(config.radius);
+          return (
+            <group key={skill.index} rotation={[config.inclination, 0, 0]}>
+              {/* Orbit ring */}
+              <Line
+                points={ringPts}
+                color={parseRgb(skill.color)}
+                lineWidth={0.8}
+                transparent
+                opacity={0.1}
+              />
+              {/* Satellite */}
+              <SkillCard3D
+                skill={skill}
+                orbitConfig={config}
+                onSelect={handleSelect}
+                isSelected={selected?.index === skill.index}
+              />
+            </group>
+          );
+        })}
 
         <OrbitControls
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.3}
           maxPolarAngle={Math.PI * 0.75}
           minPolarAngle={Math.PI * 0.25}
         />
-        <Environment preset="city" />
       </Canvas>
 
       <SkillDetailPanel skill={selected} onClose={handleClose} />

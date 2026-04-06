@@ -22,7 +22,7 @@ export default function AboutPage() {
         </h2>
         <div className="mt-3 mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-primary/60 to-primary/20" />
         <p className="mt-2 text-sm text-muted-foreground font-mono">
-          Drag to orbit. Click a card to inspect.
+          Drag to orbit. Click a skill to inspect.
         </p>
       </motion.div>
 
