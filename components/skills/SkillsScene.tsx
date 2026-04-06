@@ -37,16 +37,17 @@ export default function SkillsScene() {
   const handleClose = useCallback(() => setSelected(null), []);
 
   return (
-    <div className="relative w-full h-[500px] sm:h-[600px]">
+    <div className="relative w-full h-full">
       <Canvas
-        camera={{ position: [0, 0, 12], fov: 50 }}
+        camera={{ position: [0, 0, 12], fov: 45 }}
         style={{ background: "transparent" }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1} />
         <pointLight position={[-10, -10, -5]} intensity={0.5} color="#6366f1" />
+        <pointLight position={[0, -10, 5]} intensity={0.3} color="#8b5cf6" />
 
-        <Stars radius={50} depth={50} count={1500} factor={3} saturation={0} fade speed={1} />
+        <Stars radius={50} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
 
         {skills.map((skill, i) => (
           <SkillCard3D
