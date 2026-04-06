@@ -44,7 +44,7 @@ export default function QuickLinks() {
           >
             <Link
               href={link.href}
-              className="group flex flex-col items-center p-8 rounded-xl border border-border/50 bg-card/50 backdrop-blur-md text-center hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col items-center p-8 rounded-xl border border-border/50 bg-card/50 backdrop-blur-md text-center hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1 h-full"
             >
               <link.icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors mb-4" />
               <h3 className="text-lg font-bold font-mono mb-1">{link.title}</h3>

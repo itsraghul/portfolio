@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ResumeButton from "@/components/ResumeButton/ResumeButton";
 import Skills3DWrapper from "@/components/skills/Skills3DWrapper";
 import { fadeInUp, DEFAULT_TRANSITION } from "@/lib/animations";
 
@@ -24,19 +23,6 @@ export default function AboutPage() {
         <p className="mt-2 text-sm text-muted-foreground font-mono">
           Drag to orbit. Click a skill to inspect.
         </p>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-6 left-0 right-0 z-10 flex items-center justify-center gap-3 pointer-events-auto"
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-        transition={{ ...DEFAULT_TRANSITION, delay: 0.3 }}
-      >
-        <span className="font-mono text-sm text-muted-foreground">
-          Check the social links or
-        </span>
-        <ResumeButton fileLink={process.env.NEXT_PUBLIC_RESUME_LINK ?? ""} />
       </motion.div>
     </div>
   );
