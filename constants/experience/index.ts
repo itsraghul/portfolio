@@ -1,9 +1,15 @@
+export interface ExperienceLink {
+    label: string;
+    url: string;
+}
+
 export interface Experience {
     id: number;
     company: string;
     role: string;
     description: string[];
-    links: string;
+    links: ExperienceLink[];
+    logo?: string;
     date: string;
     color: string;
 }
@@ -22,7 +28,11 @@ export const experience: Experience[] = [
             "Optimized system performance and reduced latency through caching strategies, efficient querying, and distributed task processing (Cloud Tasks)",
             "Collaborating across product, design, and DevOps to deliver production-grade features with robust CI/CD pipelines and monitoring"
         ],
-        links: "https://velt.dev",
+        links: [
+            { label: "Velt", url: "https://velt.dev/" },
+            { label: "Superflow", url: "https://usesuperflow.com/" },
+        ],
+        logo: "/images/logos/velt.svg",
         date: "March 2025 - Present",
         color: "#6366f1",
     },
@@ -37,7 +47,10 @@ export const experience: Experience[] = [
             "Decreased server load by 80% for a feature API by implementing an efficient caching mechanism using Redis and browser storage",
             "Collaborated with DevOps and QA teams to ensure smooth, error-free deployments in CI/CD pipelines across different staging and production environments"
         ],
-        links: "",
+        links: [
+            { label: "Zoho Desk", url: "https://www.zoho.com/en-in/desk/" },
+        ],
+        logo: "/images/logos/zoho.svg",
         date: "June 2023 - March 2025",
         color: "#ef4444",
     },
@@ -53,7 +66,10 @@ export const experience: Experience[] = [
             "Increased user efficiency and lowered onboarding time by 50% through the course"
         ],
         date: "Jan 2023 - May 2023",
-        links: "",
+        links: [
+            { label: "Zoho Desk", url: "https://www.zoho.com/en-in/desk/" },
+        ],
+        logo: "/images/logos/zoho.svg",
         color: "#ef4444",
     },
     {
@@ -64,7 +80,7 @@ export const experience: Experience[] = [
             "Studied about Azure Technologies and worked on an individual project integrating Azure technologies such as Azure Bot in the project to complete the internship."
         ],
         date: "Oct 2021 - Mar 2022",
-        links: "",
+        links: [],
         color: "#3b82f6",
     },
 ];
