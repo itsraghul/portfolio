@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars, Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -73,11 +73,12 @@ export default function SkillsScene() {
   const handleClose = useCallback(() => setSelected(null), []);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full rounded-xl overflow-hidden">
       <Canvas
         camera={{ position: [0, 3, 14], fov: 45 }}
-        style={{ background: "transparent" }}
+        style={{ background: "radial-gradient(ellipse at center, #0f172a 0%, #020617 70%, #000000 100%)" }}
       >
+        <Suspense fallback={null}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[10, 5, 10]} intensity={0.8} />
         <pointLight position={[-8, -5, -8]} intensity={0.3} color="#6366f1" />
@@ -126,6 +127,7 @@ export default function SkillsScene() {
           maxPolarAngle={Math.PI * 0.75}
           minPolarAngle={Math.PI * 0.25}
         />
+        </Suspense>
       </Canvas>
 
       <SkillDetailPanel skill={selected} onClose={handleClose} />
