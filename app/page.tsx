@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import HeroSection from "@/components/landing/HeroSection";
-import StatsBar from "@/components/landing/StatsBar";
-import FeaturedWork from "@/components/landing/FeaturedWork";
-import QuickLinks from "@/components/landing/QuickLinks";
 import JsonLd from "@/components/JsonLd";
+import GameHomeClient from "@/components/landing/GameHomeClient";
 
 export const metadata: Metadata = {
   title: "Raghul S — Founding Engineer @ Velt",
@@ -34,12 +31,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={personSchema} />
-      <div className="w-full">
-        <HeroSection />
-        <StatsBar />
-        <FeaturedWork />
-        <QuickLinks />
-      </div>
+      <GameHomeClient />
     </>
   );
 }
