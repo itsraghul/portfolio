@@ -97,6 +97,14 @@ const config: Config = {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0' },
 				},
+				'float-up': {
+					'0%': { opacity: '1', transform: 'translateY(0)' },
+					'100%': { opacity: '0', transform: 'translateY(-40px)' },
+				},
+				confetti: {
+					'0%': { transform: 'translateY(0) rotate(0deg)', opacity: '1' },
+					'100%': { transform: 'translateY(300px) rotate(720deg)', opacity: '0' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -106,6 +114,8 @@ const config: Config = {
 				fadeIn: 'fadeIn 6s',
 				blob: 'blob 7s infinite',
 				'cursor-blink': 'cursor-blink 1s step-end infinite',
+			'float-up': 'float-up 1s ease-out forwards',
+			confetti: 'confetti 2s ease-out forwards',
 			}
 		}
 	},
