@@ -95,7 +95,7 @@ export default function BentoGrid({
   );
 
   return (
-    <div className="relative max-w-5xl mx-auto px-4 py-8">
+    <div className="relative w-full max-w-5xl mx-auto px-4 py-8">
       {/* Background blobs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 -left-20 w-72 h-72 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-[80px] animate-blob" />
