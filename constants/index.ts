@@ -14,3 +14,9 @@ export const FEATURED_STATS = [
     { value: 8, suffix: "+", label: "Projects Built" },
     { value: 12, suffix: "+", label: "Technologies" },
 ] as const;
+
+export const CURRENTLY_BUILDING = {
+    text: "Currently building real-time collaboration & AI-powered workflow automation at Velt",
+    link: "https://velt.dev",
+    active: true,
+} as const;

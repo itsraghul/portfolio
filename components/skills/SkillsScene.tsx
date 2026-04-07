@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useMemo, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { useState, useCallback, useMemo, useRef, useEffect, Suspense } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Stars, Line } from "@react-three/drei";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
@@ -10,6 +10,37 @@ import SkillCard3D from "./SkillCard3D";
 import SkillDetailPanel from "./SkillDetailPanel";
 import Earth from "./Earth";
 import type { Card } from "@/types";
+
+const INTRO_PLAYED_KEY = "skills-intro-played";
+const TARGET_POSITION = new THREE.Vector3(0, 3, 14);
+const START_POSITION = new THREE.Vector3(0, 18, 38);
+
+function CameraIntro({ onComplete }: { onComplete: () => void }) {
+  const { camera } = useThree();
+  const progress = useRef(0);
+  const done = useRef(false);
+
+  useEffect(() => {
+    camera.position.copy(START_POSITION);
+    camera.lookAt(0, 0, 0);
+  }, [camera]);
+
+  useFrame((_, delta) => {
+    if (done.current) return;
+    progress.current = Math.min(progress.current + delta / 2.8, 1);
+    // Smoothstep easing for cinematic feel
+    const t = progress.current * progress.current * (3 - 2 * progress.current);
+    camera.position.lerpVectors(START_POSITION, TARGET_POSITION, t);
+    camera.lookAt(0, 0, 0);
+    if (progress.current >= 1) {
+      done.current = true;
+      sessionStorage.setItem(INTRO_PLAYED_KEY, "1");
+      onComplete();
+    }
+  });
+
+  return null;
+}
 
 interface OrbitConfig {
   radius: number;
@@ -63,6 +94,10 @@ export default function SkillsScene() {
   const [selected, setSelected] = useState<Card | null>(null);
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+  const [introComplete, setIntroComplete] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return sessionStorage.getItem(INTRO_PLAYED_KEY) === "1";
+  });
 
   const orbitConfigs = useMemo(
     () => generateOrbitConfigs(skills.length),
@@ -78,7 +113,7 @@ export default function SkillsScene() {
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden">
       <Canvas
-        camera={{ position: [0, 3, 14], fov: 45 }}
+        camera={{ position: introComplete ? [0, 3, 14] : [0, 18, 38], fov: 45 }}
         style={{
           background: isDark
             ? "radial-gradient(ellipse at center, #0f172a 0%, #020617 70%, #000000 100%)"
@@ -86,6 +121,7 @@ export default function SkillsScene() {
         }}
       >
         <Suspense fallback={null}>
+        {!introComplete && <CameraIntro onComplete={() => setIntroComplete(true)} />}
         <ambientLight intensity={isDark ? 0.4 : 0.6} />
         <directionalLight position={[10, 5, 10]} intensity={isDark ? 0.8 : 1.0} />
         {isDark && (
@@ -131,6 +167,7 @@ export default function SkillsScene() {
         })}
 
         <OrbitControls
+          enabled={introComplete}
           enableZoom={false}
           enablePan={false}
           autoRotate

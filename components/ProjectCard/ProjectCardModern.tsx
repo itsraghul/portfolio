@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Code2Icon, EarthIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { openLink } from "@/lib/utils";
 import { fadeInUp, DEFAULT_TRANSITION } from "@/lib/animations";
 import type { Project } from "@/types";
@@ -20,7 +21,7 @@ interface ProjectCardModernProps {
 }
 
 export default function ProjectCardModern({ project, className = "" }: ProjectCardModernProps) {
-  const { name, stack, description, githubLink, websiteLink, category } = project;
+  const { name, stack, description, githubLink, websiteLink, category, techDescriptions } = project;
   const accentColor = CATEGORY_COLORS[category ?? "web"] ?? "#3b82f6";
   const techPills = stack.split("|").map((t) => t.trim()).filter(Boolean);
 
@@ -55,16 +56,30 @@ export default function ProjectCardModern({ project, className = "" }: ProjectCa
           )}
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          {techPills.map((tech) => (
-            <span
-              key={tech}
-              className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-muted text-muted-foreground"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+        <TooltipProvider delayDuration={200}>
+          <div className="flex flex-wrap gap-1.5">
+            {techPills.map((tech) => {
+              const desc = techDescriptions?.[tech];
+              const pill = (
+                <span
+                  key={tech}
+                  className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-muted text-muted-foreground"
+                >
+                  {tech}
+                </span>
+              );
+              if (!desc) return pill;
+              return (
+                <Tooltip key={tech}>
+                  <TooltipTrigger asChild>{pill}</TooltipTrigger>
+                  <TooltipContent side="top" className="font-mono text-[11px]">
+                    {tech} → {desc}
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
+        </TooltipProvider>
 
         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-1">
           {description}

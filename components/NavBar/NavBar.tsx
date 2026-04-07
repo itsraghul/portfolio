@@ -9,6 +9,8 @@ import { MenuIcon, XIcon } from "lucide-react";
 import LogoLight from "../../public/images/PortfolioLogo-transparent.png";
 import LogoDark from "../../public/images/PortfolioLogoDark-transparent.png";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import MagneticWrapper from "../Cursor/MagneticWrapper";
+import { TerminalIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const PAGE_LINKS = ["experience", "projects", "skills", "about"] as const;
@@ -30,19 +32,37 @@ export default function NavBar() {
         <ul className="hidden sm:flex flex-row gap-6 items-center">
           {PAGE_LINKS.map((link) => (
             <li key={link}>
+              <MagneticWrapper strength={0.4}>
+                <Link
+                  href={`/${link}`}
+                  className={cn(
+                    "font-mono text-sm capitalize transition-colors hover:text-primary",
+                    pathname === `/${link}`
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {link}
+                </Link>
+              </MagneticWrapper>
+            </li>
+          ))}
+          <li>
+            <MagneticWrapper strength={0.4}>
               <Link
-                href={`/${link}`}
+                href="/terminal"
+                title="Open terminal"
                 className={cn(
-                  "font-mono text-sm capitalize transition-colors hover:text-primary",
-                  pathname === `/${link}`
-                    ? "text-primary font-semibold"
+                  "flex items-center justify-center w-8 h-8 rounded-md transition-colors hover:text-primary hover:bg-secondary/50",
+                  pathname === "/terminal"
+                    ? "text-primary bg-secondary/50"
                     : "text-muted-foreground"
                 )}
               >
-                {link}
+                <TerminalIcon className="w-4 h-4" />
               </Link>
-            </li>
-          ))}
+            </MagneticWrapper>
+          </li>
           <li>
             <ThemeToggle />
           </li>
@@ -80,6 +100,21 @@ export default function NavBar() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/terminal"
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "flex items-center gap-2 py-2 px-3 rounded-lg font-mono text-sm transition-colors",
+                  pathname === "/terminal"
+                    ? "text-primary bg-secondary/50 font-semibold"
+                    : "text-muted-foreground hover:text-primary hover:bg-secondary/30"
+                )}
+              >
+                <TerminalIcon className="w-4 h-4" />
+                terminal
+              </Link>
+            </li>
           </ul>
         </div>
       )}

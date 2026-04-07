@@ -9,6 +9,11 @@ export const PROJECTS: Project[] = [
         websiteLink: "https://www.mock-data.com",
         category: "web",
         featured: true,
+        techDescriptions: {
+            "Next.js": "App router, API routes & SSR",
+            "Faker.js": "200+ data types across 43 locales",
+            "TailwindCSS": "UI layout & responsive design",
+        },
     },
     {
         name: "DataForge - Through WebScrape workflow",
@@ -18,6 +23,12 @@ export const PROJECTS: Project[] = [
         websiteLink: "https://flow-data-forge.vercel.app/",
         category: "web",
         featured: true,
+        techDescriptions: {
+            "Next.js": "Full-stack app with API routes",
+            "Puppeteer": "Headless browser for web scraping",
+            "Prisma": "Type-safe ORM for workflow storage",
+            "OpenAI": "AI-powered CSS selector extraction",
+        },
     },
     {
         name: "Hearty-Foods - Food delivery app",
@@ -26,6 +37,12 @@ export const PROJECTS: Project[] = [
         githubLink: "https://github.com/itsraghul/hearty-foods",
         websiteLink: "https://hearty-foods.vercel.app/",
         category: "web",
+        techDescriptions: {
+            "Next.js": "Server-side rendering & routing",
+            "MongoDB": "Menu items & order data storage",
+            "Cloudinary": "Dish image upload & CDN delivery",
+            "Paypal API": "Secure payment processing",
+        },
     },
     {
         name: "MediNet - Decentralized Medical Network",
@@ -34,6 +51,12 @@ export const PROJECTS: Project[] = [
         githubLink: "https://github.com/itsraghul/medi-net",
         websiteLink: "https://medinet.vercel.app/",
         category: "blockchain",
+        techDescriptions: {
+            "Next.js": "Frontend app & patient dashboard",
+            "Ethereum": "Smart contracts for record ownership",
+            "Web3": "Wallet connection & contract calls",
+            "IPFS": "Decentralized medical file storage",
+        },
     },
     {
         name: "CampFund - Decentralized Funding Network",
@@ -42,6 +65,12 @@ export const PROJECTS: Project[] = [
         githubLink: "https://github.com/itsraghul/camp-fund",
         websiteLink: "https://my-camp-fund.vercel.app/",
         category: "blockchain",
+        techDescriptions: {
+            "Next.js": "Campaign UI & contributor dashboard",
+            "Ethereum": "Fund transfers via Rinkeby testnet",
+            "Solidity": "Contract factory for each campaign",
+            "Azure": "Azure Bot for customer support",
+        },
     },
     {
         name: "RS Blockchain - A miniature blockchain",
@@ -50,6 +79,10 @@ export const PROJECTS: Project[] = [
         githubLink: "https://github.com/itsraghul/rs-blockchain/",
         websiteLink: "",
         category: "tools",
+        techDescriptions: {
+            "Javascript": "Core blockchain & mining logic",
+            "Redis": "Pub-sub for peer-to-peer transactions",
+        },
     },
     {
         name: "TriviaWebApp",
@@ -58,6 +91,11 @@ export const PROJECTS: Project[] = [
         githubLink: "https://github.com/itsraghul/TriviaWebApp",
         websiteLink: "https://trivia-web-app.vercel.app/",
         category: "web",
+        techDescriptions: {
+            "Javascript": "Quiz logic & score tracking",
+            "HTML": "Semantic markup & accessibility",
+            "CSS": "Styling & responsive layout",
+        },
     },
     {
         name: "Cosmic Breakout- Endless Runner Mobile Game",
@@ -66,5 +104,8 @@ export const PROJECTS: Project[] = [
         githubLink: "https://github.com/itsraghul/CosmicBreakoutGameAndroid",
         websiteLink: "",
         category: "game",
+        techDescriptions: {
+            "GDevelop5": "No-code game engine for Android build",
+        },
     },
 ];

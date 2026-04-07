@@ -5,6 +5,7 @@ import React from 'react'
 import { Button } from '../ui/button';
 import { GithubIcon, LinkedinIcon, Mail } from 'lucide-react';
 import { openLink } from '@/lib/utils';
+import MagneticWrapper from '../Cursor/MagneticWrapper';
 
 type contactLink = {
     link: string
@@ -30,9 +31,11 @@ const Footer = () => {
             <>
                 {
                     contactLinks.map((contact, index) => (
-                        <Button variant={'ghost'} key={index} onClick={() => openLink(contact.link)}>
-                            {contact.icon}
-                        </Button>
+                        <MagneticWrapper key={index} strength={0.5}>
+                            <Button variant={'ghost'} onClick={() => openLink(contact.link)}>
+                                {contact.icon}
+                            </Button>
+                        </MagneticWrapper>
                     ))
                 }
             </>
