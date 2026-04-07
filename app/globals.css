@@ -99,4 +99,10 @@ body {
   }
 }
 
+/* Custom cursor — hide default on fine-pointer devices */
+.cursor-none-global,
+.cursor-none-global * {
+  cursor: none !important;
+}
+
 

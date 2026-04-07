@@ -8,6 +8,7 @@ export type Project = {
     websiteLink?: string;
     category?: string;
     featured?: boolean;
+    techDescriptions?: Record<string, string>;
 }
 
 

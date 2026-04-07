@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, Mail } from "lucide-react";
@@ -8,6 +9,7 @@ import { openLink } from "@/lib/utils";
 import { HOMEPAGE_INFO, FEATURED_STATS } from "@/constants";
 import { fadeInUp, staggerContainer, scaleIn, DEFAULT_TRANSITION } from "@/lib/animations";
 import ProfilePortrait from "@/public/images/profile-portrait.png";
+import ReadingProgress from "@/components/ui/ReadingProgress";
 
 const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/raghul-s25", icon: LinkedinIcon },
@@ -16,8 +18,11 @@ const SOCIAL_LINKS = [
 ] as const;
 
 export default function AboutContent() {
+  const contentRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="max-w-2xl mx-auto mt-12 px-4 pb-16">
+    <div ref={contentRef} className="max-w-2xl mx-auto mt-12 px-4 pb-16">
+      <ReadingProgress containerRef={contentRef} />
       <motion.div
         className="flex flex-col items-center gap-8"
         initial="hidden"

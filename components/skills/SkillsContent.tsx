@@ -2,12 +2,14 @@
 
 import { motion } from "framer-motion";
 import Skills3DWrapper from "@/components/skills/Skills3DWrapper";
+import SoundToggle from "@/components/skills/SoundToggle";
 import { fadeInUp, DEFAULT_TRANSITION } from "@/lib/animations";
 
 export default function SkillsContent() {
   return (
     <div className="w-screen h-[calc(100vh-4rem)] -mx-4 -mt-6 relative overflow-hidden">
       <Skills3DWrapper />
+      <SoundToggle />
 
       <motion.div
         className="absolute top-6 left-0 right-0 z-10 text-center pointer-events-none"

@@ -93,6 +93,10 @@ const config: Config = {
 					'66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
 					'100%': { transform: 'translate(0px, 0px) scale(1)' },
 				},
+				'cursor-blink': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -101,6 +105,7 @@ const config: Config = {
 				blink: 'blink 0.7s step-end infinite',
 				fadeIn: 'fadeIn 6s',
 				blob: 'blob 7s infinite',
+				'cursor-blink': 'cursor-blink 1s step-end infinite',
 			}
 		}
 	},

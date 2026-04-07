@@ -5,6 +5,8 @@ import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import AppProvider from "@/components/providers/AppProvider";
+import BuildingBanner from "@/components/Banner/BuildingBanner";
+import CustomCursor from "@/components/Cursor/CustomCursor";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 
@@ -75,7 +77,9 @@ export default function RootLayout({
       >
         <AppProvider>
           <>
+            <CustomCursor />
             <ScrollProgress />
+            <BuildingBanner />
             <NavBar />
             <main className="flex-grow mx-auto px-4 py-6 mt-16 flex w-full">
               {children}
