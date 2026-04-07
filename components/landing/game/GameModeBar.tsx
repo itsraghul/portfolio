@@ -27,12 +27,12 @@ const MODES: { mode: GameMode; icon: React.ElementType; label: string }[] = [
 
 export default function GameModeBar({ currentMode, onModeChange }: GameModeBarProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
-    >
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
       <div className="flex items-center gap-1 px-2 py-2 rounded-2xl border border-border/50 bg-card/80 backdrop-blur-xl shadow-2xl">
         <div className="flex items-center gap-1 px-2">
           <GamepadIcon className="w-4 h-4 text-muted-foreground" />
@@ -59,6 +59,7 @@ export default function GameModeBar({ currentMode, onModeChange }: GameModeBarPr
           </Button>
         ))}
       </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
