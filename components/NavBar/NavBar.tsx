@@ -11,7 +11,7 @@ import LogoDark from "../../public/images/PortfolioLogoDark-transparent.png";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { cn } from "@/lib/utils";
 
-const PAGE_LINKS = ["experience", "projects", "about"] as const;
+const PAGE_LINKS = ["experience", "projects", "skills", "about"] as const;
 
 export default function NavBar() {
   const { theme } = useTheme();
