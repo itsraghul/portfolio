@@ -1,31 +1,33 @@
-"use client";
+import type { Metadata } from "next";
+import SkillsContent from "@/components/skills/SkillsContent";
+import JsonLd from "@/components/JsonLd";
 
-import { motion } from "framer-motion";
-import Skills3DWrapper from "@/components/skills/Skills3DWrapper";
-import SoundToggle from "@/components/skills/SoundToggle";
-import { fadeInUp, DEFAULT_TRANSITION } from "@/lib/animations";
+export const metadata: Metadata = {
+  title: "Skills",
+  description:
+    "Raghul S's technical skills across 12+ technologies — React, Next.js, TypeScript, Node.js, blockchain, and more.",
+  openGraph: {
+    title: "Skills — Raghul S",
+    description:
+      "Raghul S's technical skills across 12+ technologies — React, Next.js, TypeScript, Node.js, blockchain, and more.",
+    url: "https://raghuls.dev/skills",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://raghuls.dev" },
+    { "@type": "ListItem", position: 2, name: "Skills", item: "https://raghuls.dev/skills" },
+  ],
+};
 
 export default function SkillsPage() {
   return (
-    <div className="w-screen h-[calc(100vh-4rem)] -mx-4 -mt-6 relative overflow-hidden">
-      <Skills3DWrapper />
-      <SoundToggle />
-
-      <motion.div
-        className="absolute top-6 left-0 right-0 z-10 text-center pointer-events-none"
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-        transition={DEFAULT_TRANSITION}
-      >
-        <h2 className="text-3xl sm:text-4xl font-bold font-mono text-primary">
-          Skills
-        </h2>
-        <div className="mt-3 mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-primary/60 to-primary/20" />
-        <p className="mt-2 text-sm text-muted-foreground font-mono">
-          Drag to orbit. Click a skill to inspect.
-        </p>
-      </motion.div>
-    </div>
+    <>
+      <JsonLd data={breadcrumbSchema} />
+      <SkillsContent />
+    </>
   );
 }
