@@ -36,16 +36,21 @@ export default function HopPlatform({
       data-block-id={config.blockId}
     >
       {/* Scaled-down bento content */}
-      <div
-        className="origin-top-left pointer-events-none"
-        style={{
-          transform: `scale(${config.height > 50 ? 0.35 : 0.3})`,
-          width: config.width / 0.3,
-          height: config.height / 0.3,
-        }}
-      >
-        {children}
-      </div>
+      {(() => {
+        const scale = config.height > 50 ? 0.35 : 0.3;
+        return (
+          <div
+            className="origin-top-left pointer-events-none"
+            style={{
+              transform: `scale(${scale})`,
+              width: config.width / scale,
+              height: config.height / scale,
+            }}
+          >
+            {children}
+          </div>
+        );
+      })()}
 
       {/* Platform label overlay */}
       <div className="absolute inset-0 flex items-center justify-center">

@@ -32,21 +32,24 @@ export const GAME_HEIGHT = 600;
 export const CHAR_SIZE = 48;
 
 // Platform layout for hop mode — bottom to top
-// Y values increase upward; 0 is the ground level
+// In CSS, larger Y = lower on screen. Platform 0 is at the bottom (large Y),
+// Platform 10 is at the top (small Y). Character hops upward toward smaller Y values.
 const PLATFORM_SPACING = 130;
+const TOTAL_PLATFORMS = 10;
+const WORLD_BASE_Y = TOTAL_PLATFORMS * PLATFORM_SPACING; // 1300 — world bottom
 
 export const PLATFORM_CONFIGS: PlatformConfig[] = [
-  { blockId: "hero-name",         x: 200, y: 0 * PLATFORM_SPACING,  width: 400, height: 60, behavior: "static" },
-  { blockId: "hero-cta",          x: 250, y: 1 * PLATFORM_SPACING,  width: 300, height: 50, behavior: "static" },
-  { blockId: "stat-experience",   x: 80,  y: 2 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "static" },
-  { blockId: "stat-projects",     x: 500, y: 3 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "horizontal", moveRange: 150, moveSpeed: 1.5 },
-  { blockId: "stat-technologies", x: 200, y: 4 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "static" },
-  { blockId: "project-1",         x: 450, y: 5 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "horizontal", moveRange: 150, moveSpeed: 1.2 },
-  { blockId: "project-2",         x: 100, y: 6 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "vertical",   moveRange: 30,  moveSpeed: 1.0 },
-  { blockId: "project-3",         x: 350, y: 7 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "horizontal", moveRange: 120, moveSpeed: 1.8 },
-  { blockId: "quick-experience",  x: 150, y: 8 * PLATFORM_SPACING,  width: 150, height: 40, behavior: "static" },
-  { blockId: "quick-skills",      x: 250, y: 9 * PLATFORM_SPACING,  width: 300, height: 50, behavior: "vertical",   moveRange: 20,  moveSpeed: 0.8 },
-  { blockId: "quick-projects",    x: 300, y: 10 * PLATFORM_SPACING, width: 150, height: 40, behavior: "static" },
+  { blockId: "hero-name",         x: 200, y: WORLD_BASE_Y - 0  * PLATFORM_SPACING, width: 400, height: 60, behavior: "static" },
+  { blockId: "hero-cta",          x: 250, y: WORLD_BASE_Y - 1  * PLATFORM_SPACING, width: 300, height: 50, behavior: "static" },
+  { blockId: "stat-experience",   x: 80,  y: WORLD_BASE_Y - 2  * PLATFORM_SPACING, width: 150, height: 40, behavior: "static" },
+  { blockId: "stat-projects",     x: 500, y: WORLD_BASE_Y - 3  * PLATFORM_SPACING, width: 150, height: 40, behavior: "horizontal", moveRange: 150, moveSpeed: 1.5 },
+  { blockId: "stat-technologies", x: 200, y: WORLD_BASE_Y - 4  * PLATFORM_SPACING, width: 150, height: 40, behavior: "static" },
+  { blockId: "project-1",         x: 450, y: WORLD_BASE_Y - 5  * PLATFORM_SPACING, width: 150, height: 40, behavior: "horizontal", moveRange: 150, moveSpeed: 1.2 },
+  { blockId: "project-2",         x: 100, y: WORLD_BASE_Y - 6  * PLATFORM_SPACING, width: 150, height: 40, behavior: "vertical",   moveRange: 30,  moveSpeed: 1.0 },
+  { blockId: "project-3",         x: 350, y: WORLD_BASE_Y - 7  * PLATFORM_SPACING, width: 150, height: 40, behavior: "horizontal", moveRange: 120, moveSpeed: 1.8 },
+  { blockId: "quick-experience",  x: 150, y: WORLD_BASE_Y - 8  * PLATFORM_SPACING, width: 150, height: 40, behavior: "static" },
+  { blockId: "quick-skills",      x: 250, y: WORLD_BASE_Y - 9  * PLATFORM_SPACING, width: 300, height: 50, behavior: "vertical",   moveRange: 20,  moveSpeed: 0.8 },
+  { blockId: "quick-projects",    x: 300, y: WORLD_BASE_Y - 10 * PLATFORM_SPACING, width: 150, height: 40, behavior: "static" },
 ];
 
 export const HOP_SCORE = {
