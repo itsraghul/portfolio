@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import {
   BriefcaseIcon,
   PuzzleIcon,
-  ArrowDownIcon,
+  ArrowUpIcon,
   MoveIcon,
   GamepadIcon,
 } from "lucide-react";
@@ -21,7 +21,7 @@ interface GameModeBarProps {
 const MODES: { mode: GameMode; icon: React.ElementType; label: string }[] = [
   { mode: "normal", icon: BriefcaseIcon, label: "Normal" },
   { mode: "puzzle", icon: PuzzleIcon, label: "Puzzle" },
-  { mode: "gravity", icon: ArrowDownIcon, label: "Gravity" },
+  { mode: "hop", icon: ArrowUpIcon, label: "Hop" },
   { mode: "freestyle", icon: MoveIcon, label: "Freestyle" },
 ];
 
