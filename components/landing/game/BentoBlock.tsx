@@ -16,7 +16,6 @@ interface BentoBlockProps {
   onHoverStart?: () => void;
   onHoverEnd?: () => void;
   onBlockDragEnd?: (id: BlockId, event: MouseEvent | TouchEvent | PointerEvent) => void;
-  gravityPosition?: { x: number; y: number };
   children: React.ReactNode;
 }
 
@@ -37,7 +36,6 @@ export default function BentoBlock({
   onHoverStart,
   onHoverEnd,
   onBlockDragEnd,
-  gravityPosition,
   children,
 }: BentoBlockProps) {
   const handleClick = () => {
@@ -68,11 +66,6 @@ export default function BentoBlock({
       onClick={handleClick}
       onHoverStart={onHoverStart}
       onHoverEnd={onHoverEnd}
-      animate={
-        gravityPosition
-          ? { x: gravityPosition.x, y: gravityPosition.y }
-          : undefined
-      }
       className={cn(
         SIZE_CLASSES[size],
         "relative rounded-xl border border-border/50 bg-card/50 backdrop-blur-md overflow-hidden transition-colors",

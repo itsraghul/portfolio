@@ -27,7 +27,6 @@ interface BentoGridProps {
   onBlockClick?: (id: BlockId) => void;
   onBlockHoverStart?: (id: string) => void;
   onBlockHoverEnd?: (id: string) => void;
-  gravityPositions?: Map<BlockId, { x: number; y: number }>;
 }
 
 function renderBlockContent(id: BlockId) {
@@ -63,7 +62,6 @@ export default function BentoGrid({
   onBlockClick,
   onBlockHoverStart,
   onBlockHoverEnd,
-  gravityPositions,
 }: BentoGridProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const isDraggable = state.mode !== "normal";
@@ -124,7 +122,6 @@ export default function BentoGrid({
               onHoverStart={() => onBlockHoverStart?.(id)}
               onHoverEnd={() => onBlockHoverEnd?.(id)}
               onBlockDragEnd={handleDragEnd}
-              gravityPosition={gravityPositions?.get(id)}
             >
               {renderBlockContent(id)}
             </BentoBlock>

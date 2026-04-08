@@ -20,7 +20,20 @@ export interface BentoBlockConfig {
   correctPosition: number;
 }
 
-export type GameMode = "normal" | "puzzle" | "gravity" | "freestyle";
+export type GameMode = "normal" | "puzzle" | "hop" | "freestyle";
+
+export type PlatformBehavior = "static" | "horizontal" | "vertical";
+
+export interface PlatformConfig {
+  blockId: BlockId;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  behavior: PlatformBehavior;
+  moveRange?: number;
+  moveSpeed?: number;
+}
 
 export interface GameState {
   mode: GameMode;
