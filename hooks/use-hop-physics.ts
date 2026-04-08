@@ -5,6 +5,10 @@ import type { BlockId, PlatformConfig } from "@/types/game";
 import { PLATFORM_CONFIGS, GAME_WIDTH, CHAR_SIZE, HOP_SCORE } from "@/constants/game";
 import type { HopInput } from "./use-hop-controls";
 
+// Initial camera position: frames the starting character near the lower third of the viewport
+const INITIAL_CHAR_Y = PLATFORM_CONFIGS[0].y - CHAR_SIZE;
+const INITIAL_CAMERA_Y = INITIAL_CHAR_Y - 350;
+
 const GRAVITY = 0.6;
 const JUMP_VEL = -13;
 const MOVE_SPEED = 5;
@@ -47,8 +51,8 @@ export function useHopPhysics(
 ) {
   const [physicsState, setPhysicsState] = useState<HopPhysicsState>(() => createInitialPhysicsState());
   const charRef = useRef<CharacterState>(createInitialChar());
-  const cameraYRef = useRef(0);
-  const maxCameraYRef = useRef(0);
+  const cameraYRef = useRef(INITIAL_CAMERA_Y);
+  const maxCameraYRef = useRef(INITIAL_CAMERA_Y);
   const visitedPlatformsRef = useRef(new Set<number>([0]));
   const highestIdxRef = useRef(0);
   const gameOverRef = useRef(false);
@@ -60,8 +64,8 @@ export function useHopPhysics(
 
   const restart = useCallback(() => {
     charRef.current = createInitialChar();
-    cameraYRef.current = 0;
-    maxCameraYRef.current = 0;
+    cameraYRef.current = INITIAL_CAMERA_Y;
+    maxCameraYRef.current = INITIAL_CAMERA_Y;
     visitedPlatformsRef.current = new Set([0]);
     highestIdxRef.current = 0;
     gameOverRef.current = false;
@@ -241,7 +245,7 @@ function createInitialPhysicsState(): HopPhysicsState {
     characterVel: { vx: 0, vy: 0 },
     isGrounded: true,
     facingRight: true,
-    cameraY: 0,
+    cameraY: INITIAL_CAMERA_Y,
     platformPositions: computePlatformPositions(0),
     isGameOver: false,
     isComplete: false,
