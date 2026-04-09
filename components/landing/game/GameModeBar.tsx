@@ -7,6 +7,7 @@ import {
   ArrowUpIcon,
   MoveIcon,
   GamepadIcon,
+  ZapIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,7 @@ const MODES: { mode: GameMode; icon: React.ElementType; label: string }[] = [
   { mode: "normal", icon: BriefcaseIcon, label: "Normal" },
   { mode: "puzzle", icon: PuzzleIcon, label: "Puzzle" },
   { mode: "hop", icon: ArrowUpIcon, label: "Hop" },
+  { mode: "dodge", icon: ZapIcon, label: "Dodge" },
   { mode: "freestyle", icon: MoveIcon, label: "Freestyle" },
 ];
 

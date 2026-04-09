@@ -36,7 +36,7 @@ function createInitialState(mode: GameMode = "normal"): GameState {
     revealedEggs: new Set(),
     puzzleSolved: false,
     moveCount: 0,
-    startTime: mode === "puzzle" || mode === "hop" ? Date.now() : null,
+    startTime: mode === "puzzle" || mode === "hop" || mode === "dodge" ? Date.now() : null,
   };
 }
 

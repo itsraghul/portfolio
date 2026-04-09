@@ -13,6 +13,7 @@ import GameModeBar from "@/components/landing/game/GameModeBar";
 import ScoreDisplay from "@/components/landing/game/ScoreDisplay";
 import PuzzleComplete from "@/components/landing/game/PuzzleComplete";
 import HopGame from "@/components/landing/game/HopGame";
+import DodgeGame from "@/components/landing/game/DodgeGame";
 
 export default function GameHomeClient() {
   const { state, dispatch, isGameActive, correctCount, setMode } = useGameState();
@@ -24,6 +25,7 @@ export default function GameHomeClient() {
   });
 
   const isHopMode = state.mode === "hop";
+  const isDodgeMode = state.mode === "dodge";
 
   return (
     <>
@@ -46,8 +48,16 @@ export default function GameHomeClient() {
         />
       )}
 
+      {/* Dodge mode: bullet hell game */}
+      {isDodgeMode && (
+        <DodgeGame
+          startTime={state.startTime}
+          onModeChange={setMode}
+        />
+      )}
+
       {/* Other game modes: bento grid */}
-      {isGameActive && !isHopMode && (
+      {isGameActive && !isHopMode && !isDodgeMode && (
         <>
           <BentoGrid
             state={state}

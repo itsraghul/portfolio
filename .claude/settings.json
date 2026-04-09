@@ -3,13 +3,23 @@
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "npx next lint --file $CLAUDE_FILE_PATH --quiet 2>/dev/null || true"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx next lint --file $CLAUDE_FILE_PATH --quiet 2>/dev/null || true"
+          }
+        ]
       }
     ],
     "PreToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "echo $CLAUDE_FILE_PATH | grep -q 'package-lock.json' && echo 'BLOCK: Do not edit lock files directly' && exit 1 || exit 0"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo $CLAUDE_FILE_PATH | grep -q 'package-lock.json' && echo 'BLOCK: Do not edit lock files directly' && exit 1 || exit 0"
+          }
+        ]
       }
     ]
   }

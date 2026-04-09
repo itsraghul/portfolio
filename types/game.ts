@@ -20,7 +20,26 @@ export interface BentoBlockConfig {
   correctPosition: number;
 }
 
-export type GameMode = "normal" | "puzzle" | "hop" | "freestyle";
+export type GameMode = "normal" | "puzzle" | "hop" | "freestyle" | "dodge";
+
+export type DodgePattern = "right" | "top" | "bottom" | "left";
+
+export interface DodgeWaveConfig {
+  durationMs: number;
+  spawnIntervalMs: number;
+  speedBase: number;
+  patterns: DodgePattern[];
+}
+
+export interface Bullet {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  label: string;
+  color: string;
+  radius: number;
+}
 
 export type PlatformBehavior = "static" | "horizontal" | "vertical";
 
