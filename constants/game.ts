@@ -1,4 +1,4 @@
-import type { BentoBlockConfig, BlockId, EasterEgg, PlatformConfig } from "@/types/game";
+import type { BentoBlockConfig, BlockId, DodgeWaveConfig, EasterEgg, PlatformConfig } from "@/types/game";
 
 export const BENTO_BLOCKS: BentoBlockConfig[] = [
   { id: "hero-name", label: "Identity", size: "2x2", correctPosition: 0 },
@@ -51,6 +51,35 @@ export const PLATFORM_CONFIGS: PlatformConfig[] = [
   { blockId: "quick-skills",      x: 250, y: WORLD_BASE_Y - 9  * PLATFORM_SPACING, width: 300, height: 50, behavior: "vertical",   moveRange: 20,  moveSpeed: 0.8 },
   { blockId: "quick-projects",    x: 300, y: WORLD_BASE_Y - 10 * PLATFORM_SPACING, width: 150, height: 40, behavior: "static" },
 ];
+
+// Dodge mode constants
+export const INITIAL_LIVES = 3;
+export const PLAYER_RADIUS = 20; // hitbox radius (slightly smaller than CHAR_SIZE/2 for fairness)
+export const DODGE_BULLET_RADIUS = 14;
+export const DODGE_INVINCIBILITY_MS = 2000;
+export const DODGE_WAVE_TRANSITION_MS = 1500;
+export const DODGE_SCORE_PER_FRAME = 1; // multiplied by wave number in the loop
+
+export const DODGE_ICONS = [
+  { label: "Re", color: "#61DAFB" }, // React
+  { label: "TS", color: "#3178C6" }, // TypeScript
+  { label: "Py", color: "#FFD43B" }, // Python
+  { label: "Js", color: "#84BA64" }, // Node/JS
+  { label: "Rs", color: "#CE422B" }, // Rust
+  { label: "Do", color: "#2496ED" }, // Docker
+  { label: "Nx", color: "#CCCCCC" }, // Next.js
+  { label: "Sw", color: "#F05138" }, // Swift
+] as const;
+
+export const DODGE_WAVES: DodgeWaveConfig[] = [
+  { durationMs: 10000, spawnIntervalMs: 1200, speedBase: 3.0, patterns: ["right"] },
+  { durationMs: 12000, spawnIntervalMs: 1000, speedBase: 3.5, patterns: ["right", "top"] },
+  { durationMs: 12000, spawnIntervalMs: 850,  speedBase: 4.0, patterns: ["right", "top", "bottom"] },
+  { durationMs: 14000, spawnIntervalMs: 700,  speedBase: 4.5, patterns: ["right", "top", "bottom", "left"] },
+  { durationMs: 15000, spawnIntervalMs: 550,  speedBase: 5.2, patterns: ["right", "top", "bottom", "left"] },
+];
+
+export const DODGE_WAVE_BONUS = 200; // score bonus per wave cleared
 
 export const HOP_SCORE = {
   PLATFORM_LAND: 50,
