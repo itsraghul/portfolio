@@ -29,7 +29,7 @@ export default function ExperiencePage() {
     <>
       <JsonLd data={breadcrumbSchema} />
       {/* Break out of the main layout padding for full-viewport scroll sections */}
-      <div className="-mx-4 -mt-6 w-[100vw] relative left-1/2 -translate-x-1/2">
+      <div className="-mx-4 -mt-6 w-screen overflow-x-hidden relative left-1/2 -translate-x-1/2">
         <ScrollExperience experiences={experience} />
       </div>
     </>
