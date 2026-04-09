@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -19,7 +19,11 @@ export default function NavBar() {
   const { theme } = useTheme();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const LOGO = theme === "dark" ? LogoDark : LogoLight;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const LOGO = mounted && theme === "dark" ? LogoDark : LogoLight;
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border/50">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import ExperienceHeader from "@/components/experience/ExperienceHeader";
-import ExperienceTimeline from "@/components/experience/ExperienceTimeline";
 import JsonLd from "@/components/JsonLd";
+import ScrollExperience from "@/components/experience/ScrollExperience";
+import { experience } from "@/constants/experience";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -28,9 +28,9 @@ export default function ExperiencePage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
-      <div className="max-w-5xl mx-auto mt-8 px-4">
-        <ExperienceHeader />
-        <ExperienceTimeline />
+      {/* Break out of the main layout padding for full-viewport scroll sections */}
+      <div className="-mx-4 -mt-6 w-[100vw] relative left-1/2 -translate-x-1/2">
+        <ScrollExperience experiences={experience} />
       </div>
     </>
   );
