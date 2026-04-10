@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HeartIcon } from "lucide-react";
 import ProfilePortrait from "@/public/images/profile-portrait.png";
 import { GAME_WIDTH, GAME_HEIGHT, CHAR_SIZE, DODGE_WAVES, DODGE_ICONS, INITIAL_LIVES } from "@/constants/game";
@@ -39,8 +40,14 @@ function ReducedMotionFallback() {
 }
 
 export default function DodgeGame({ startTime, onModeChange }: DodgeGameProps) {
-  // useReducedMotion is SSR-safe (returns null on server, boolean on client)
-  const prefersReducedMotion = useReducedMotion() ?? false;
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
   // Hook called unconditionally; pass false when motion is disabled so loop never starts
   const { containerRef, canvasRef, playerDomRef, hudState, waveAnnouncement, restart } =
     useDodgeGame(!prefersReducedMotion);

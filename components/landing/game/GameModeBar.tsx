@@ -8,6 +8,7 @@ import {
   MoveIcon,
   GamepadIcon,
   ZapIcon,
+  type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +20,7 @@ interface GameModeBarProps {
   onModeChange: (mode: GameMode) => void;
 }
 
-const MODES: { mode: GameMode; icon: React.ElementType; label: string }[] = [
+const MODES: { mode: GameMode; icon: LucideIcon; label: string }[] = [
   { mode: "normal", icon: BriefcaseIcon, label: "Normal" },
   { mode: "puzzle", icon: PuzzleIcon, label: "Puzzle" },
   { mode: "hop", icon: ArrowUpIcon, label: "Hop" },
