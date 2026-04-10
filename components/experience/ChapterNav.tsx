@@ -15,16 +15,23 @@ export default function ChapterNav({ experiences, sectionRefs }: ChapterNavProps
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        const refs = sectionRefs.current;
+        if (!refs) return;
+        // Pick the most-intersecting visible section from this batch
+        let bestIdx = -1;
+        let bestRatio = 0;
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const refs = sectionRefs.current;
-            if (!refs) return;
+          if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
             const idx = refs.indexOf(entry.target as HTMLElement);
-            if (idx !== -1) setActiveIndex(idx);
+            if (idx !== -1) {
+              bestRatio = entry.intersectionRatio;
+              bestIdx = idx;
+            }
           }
         });
+        if (bestIdx !== -1) setActiveIndex(bestIdx);
       },
-      { threshold: 0.5 }
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
 
     const refs = sectionRefs.current;
