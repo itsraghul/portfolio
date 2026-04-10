@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.0.1] - 2026-04-10
+
+### Fixed
+- **Production crash** — `TypeError: (0, s.use) is not a function` caused by framer-motion's `useReducedMotion()` calling `React.use()` (a React 19 API) at runtime on React 18. Replaced with native `window.matchMedia("(prefers-reduced-motion: reduce)")` in all three affected components: `DodgeGame`, `ChapterSection`, and `ClosingSection`.
+
 ## [0.1.0.0] - 2026-04-09
 
 ### Added
