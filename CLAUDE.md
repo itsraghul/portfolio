@@ -7,6 +7,7 @@ Personal portfolio site for Raghul S. Built with Next.js 14, TypeScript, Tailwin
 - `npm run dev` — Start dev server
 - `npm run build` — Production build
 - `npm run lint` — Run ESLint (next/core-web-vitals + next/typescript)
+- `npm test` — Run Vitest suite (`npm run test:watch` for watch mode)
 
 ## Project Structure
 
@@ -78,6 +79,14 @@ All portfolio data lives in `constants/`:
 ## Deployment
 
 Deployed on Vercel. Vercel Speed Insights integrated.
+
+## Testing
+
+- **Vitest 4** + @testing-library/react (jsdom). Tests live in `test/`, run with `npm test`. See [TESTING.md](TESTING.md) for conventions.
+- 100% test coverage is the goal — tests make vibe coding safe.
+- When writing a new function, write a corresponding test. When fixing a bug, write a regression test.
+- When adding error handling, write a test that triggers the error. When adding a conditional, test BOTH paths.
+- Never commit code that makes existing tests fail.
 
 ## Skill routing
 
