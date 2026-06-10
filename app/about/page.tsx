@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import JsonLd from "@/components/JsonLd";
 import WorldShell from "@/components/bridge/WorldShell";
 import LogEntry from "@/components/captains-log/LogEntry";
@@ -53,10 +54,14 @@ export default function AboutPage() {
         </header>
 
         <div className="mt-11 flex items-center gap-[26px] max-[620px]:flex-col max-[620px]:text-center">
-          <div className="grid h-[132px] w-[132px] shrink-0 place-items-center rounded-full border-[3px] border-[#9c7c45] bg-[repeating-linear-gradient(45deg,#e6d2a9_0_10px,#dfc89a_10px_20px)] outline outline-2 outline-offset-[5px] outline-[rgba(156,124,69,.4)]">
-            <span className="bg-[rgba(243,230,200,.85)] px-2 py-[3px] font-mono-tech text-[10px] tracking-[0.1em] text-[#8a6f44]">
-              {LOG_PORTRAIT.placeholder}
-            </span>
+          <div className="h-[132px] w-[132px] shrink-0 overflow-hidden rounded-full border-[3px] border-[#9c7c45] outline outline-2 outline-offset-[5px] outline-[rgba(156,124,69,.4)]">
+            <Image
+              src="/images/profile-portrait.png"
+              alt="Portrait of Raghul S"
+              width={132}
+              height={132}
+              className="h-full w-full object-cover"
+            />
           </div>
           <div>
             <h2 className="font-pirata text-[38px] font-normal leading-none">{LOG_PORTRAIT.name}</h2>

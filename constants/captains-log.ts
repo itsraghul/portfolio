@@ -9,7 +9,6 @@ export const LOG_HEAD = {
 } as const;
 
 export const LOG_PORTRAIT = {
-    placeholder: "captain's portrait",
     name: "Raghul S",
     epithet: '"Surgeon of the Stack"',
     role: "Founding Software Engineer · Velt",
