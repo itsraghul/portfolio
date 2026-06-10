@@ -9,6 +9,14 @@ const config: Config = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				rajdhani: ['var(--font-rajdhani)', 'sans-serif'],
+				'mono-tech': ['var(--font-share-tech)', 'monospace'],
+				pirata: ['var(--font-pirata)', 'serif'],
+				crimson: ['var(--font-crimson)', 'serif'],
+				pixel: ['var(--font-press-start)', 'monospace'],
+				vt: ['var(--font-vt323)', 'monospace'],
+			},
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
@@ -75,47 +83,10 @@ const config: Config = {
 					from: { height: 'var(--radix-accordion-content-height)' },
 					to: { height: '0' }
 				},
-				typing: {
-					from: { width: '0', height: 'auto' },
-					to: { width: '100%', height: 'auto' },
-				},
-				blink: {
-					'0%, 100%': { 'border-color': 'transparent' },
-					'50%': { 'border-color': 'black' },
-				},
-				fadeIn: {
-					'0%': { opacity: '0' },
-					'100%': { opacity: '1' }
-				},
-				blob: {
-					'0%': { transform: 'translate(0px, 0px) scale(1)' },
-					'33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-					'66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-					'100%': { transform: 'translate(0px, 0px) scale(1)' },
-				},
-				'cursor-blink': {
-					'0%, 100%': { opacity: '1' },
-					'50%': { opacity: '0' },
-				},
-				'float-up': {
-					'0%': { opacity: '1', transform: 'translateY(0)' },
-					'100%': { opacity: '0', transform: 'translateY(-40px)' },
-				},
-				confetti: {
-					'0%': { transform: 'translateY(0) rotate(0deg)', opacity: '1' },
-					'100%': { transform: 'translateY(300px) rotate(720deg)', opacity: '0' },
-				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				typing: 'typing 3s steps(20, end)',
-				blink: 'blink 0.7s step-end infinite',
-				fadeIn: 'fadeIn 6s',
-				blob: 'blob 7s infinite',
-				'cursor-blink': 'cursor-blink 1s step-end infinite',
-			'float-up': 'float-up 1s ease-out forwards',
-			confetti: 'confetti 2s ease-out forwards',
 			}
 		}
 	},

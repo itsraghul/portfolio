@@ -1,25 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import NavBar from "@/components/NavBar/NavBar";
-import Footer from "@/components/Footer/Footer";
-import ScrollProgress from "@/components/ui/ScrollProgress";
-import AppProvider from "@/components/providers/AppProvider";
-import BuildingBanner from "@/components/Banner/BuildingBanner";
-import CustomCursor from "@/components/Cursor/CustomCursor";
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { fontVariables } from "@/app/fonts";
+import BridgeNav from "@/components/bridge/BridgeNav";
+import PageVeil from "@/components/bridge/PageVeil";
+import BridgeToaster from "@/components/bridge/BridgeToaster";
+import BridgeEffects from "@/components/bridge/BridgeEffects";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://raghuls.dev"),
@@ -71,22 +57,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
-      >
-        <AppProvider>
-          <>
-            <CustomCursor />
-            <ScrollProgress />
-            <BuildingBanner />
-            <NavBar />
-            <main className="flex-grow mx-auto px-4 py-6 mt-16 flex w-full">
-              {children}
-            </main>
-            <Footer />
-          </>
-        </AppProvider>
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={`${fontVariables} antialiased`}>
+        <BridgeNav />
+        {children}
+        <PageVeil />
+        <BridgeToaster />
+        <BridgeEffects />
         <SpeedInsights />
       </body>
     </html>

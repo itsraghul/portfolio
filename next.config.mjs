@@ -5,7 +5,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
     webpack: (config, { isServer }) => {
         if (!isServer) {
             config.resolve.alias = {
@@ -24,7 +23,7 @@ const nextConfig = {
         search: '',
       },
       {
-        pathname: '/images/logos/**',
+        pathname: '/images/**',
         search: '',
       },
     ],

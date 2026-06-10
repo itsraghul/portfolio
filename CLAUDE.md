@@ -1,26 +1,32 @@
 # Portfolio — Conakry
 
-Personal portfolio site for Raghul S. Built with Next.js 14, TypeScript, Tailwind CSS, and Shadcn/UI.
+Personal portfolio site for Raghul S. Built with Next.js 15, React 19, TypeScript, and Tailwind CSS. The site is three themed "worlds": a sci-fi ship HUD (home, contact, terminal), a One Piece-style parchment world (experience, about), and a classic RPG world (projects, skills). A shared "bridge" nav re-skins itself per world.
 
 ## Commands
 
 - `npm run dev` — Start dev server
 - `npm run build` — Production build
 - `npm run lint` — Run ESLint (next/core-web-vitals + next/typescript)
+- `npm test` — Run Vitest suite (`npm run test:watch` for watch mode)
 
 ## Project Structure
 
-- `app/` — Next.js App Router pages (home, experience, projects, about, others)
-- `components/` — React components
-  - `ui/` — Shadcn/UI components (do not edit manually; use `npx shadcn@latest add <component>`)
-  - `landing/` — Landing page sections (HeroSection, StatsBar, FeaturedWork, QuickLinks)
-  - `skills/` — 3D skills scene and fallback components
-  - `experience/` — Experience timeline components
-  - Custom: NavBar, Footer, ProjectCard, ResumeButton, ThemeToggle
-- `constants/` — All static data (projects, experience entries, skills). No API/database.
-- `types/` — TypeScript type definitions
-- `lib/utils.ts` — `cn()` helper (clsx + tailwind-merge) and `openLink()`
-- `hooks/` — Custom React hooks
+- `app/` — Next.js App Router pages (home, experience, projects, skills, about, contact, terminal, others)
+- `components/` — React components, one directory per world/page
+  - `bridge/` — Cross-world chrome: BridgeNav (re-skinning nav), PageVeil (wipe transitions + `navigateWithVeil`), BridgeToaster, BridgeEffects (konami + hover sfx), WorldShell (`data-world` scope), HudPanel
+  - `home/` — Ship HUD landing (Starfield, HeroPanel, StatRings, DestinationPorts)
+  - `comms/` — Contact page (RadarHeader, ChannelCards, Composer)
+  - `terminal/` — CRT shell (TerminalShell)
+  - `voyage/` — Experience page (VoyageRoute ship-on-path, ChapterSection, WantedPoster)
+  - `captains-log/` — About page (LogEntry)
+  - `quests/` — Projects page (QuestLog, QuestList, QuestDetail, battle/)
+  - `character/` — Skills page (HeroCard, AttributeBars, InventoryGrid)
+  - `ui/` — Shadcn/UI components (do not edit manually; use `npx shadcn@latest add <component>`; currently unreferenced — see TODOS.md)
+- `constants/` — All static data, including per-world themed copy. No API/database.
+- `types/` — TypeScript type definitions (`worlds.ts` holds the world/quest/battle/inventory types)
+- `lib/` — `utils.ts` (`cn()`, `starRating()`), `sfx.ts` (WebAudio synth singleton), `toast.ts` (bridge toast emitter)
+- `hooks/` — Custom React hooks (use-battle, use-terminal, use-konami, use-in-view, use-count-up, use-typed-loop, use-clock, use-reduced-motion)
+- `test/` — Vitest suite
 - `public/images/` — Static image assets
 
 ## Coding Standards
@@ -34,7 +40,6 @@ Personal portfolio site for Raghul S. Built with Next.js 14, TypeScript, Tailwin
 
 ### DRY
 - Extract shared animation configs, glassmorphism styles, and scroll-triggered wrappers into reusable utilities/hooks.
-- Avoid copy-pasting framer-motion boilerplate across components.
 - Shared constants and types live in `constants/` and `types/` respectively.
 
 ### React Best Practices
@@ -55,29 +60,35 @@ Personal portfolio site for Raghul S. Built with Next.js 14, TypeScript, Tailwin
 
 - **TypeScript strict mode** enabled
 - **Path alias**: `@/*` maps to project root
-- **Styling**: Tailwind CSS with CSS variables (HSL). Dark mode via `next-themes` (class-based).
+- **Theming**: Per-world CSS variable blocks in `app/globals.css`, scoped by `[data-world]` on the page wrapper and `body:has([data-world])` for the fixed chrome. Each page roots itself in a `WorldShell`. The `--bridge-*` variables drive the nav/veil/toast skin. No light/dark toggle — worlds own their palettes.
 - **Components**: Pages are server components by default; add `"use client"` only when needed
 - **Shadcn/UI**: New York style, Zinc base color, RSC enabled. Config in `components.json`.
 - **Icons**: Use `lucide-react`
-- **Fonts**: Geist Sans (default) and Geist Mono (monospace), loaded locally in `app/fonts/`
-- **Animations**: Use framer-motion for scroll/interaction animations. CSS keyframes for perpetual background effects.
-- **3D**: Use @react-three/fiber + @react-three/drei for Three.js scenes. Always dynamic import with `ssr: false`.
+- **Fonts**: Six Google fonts via `next/font/google` in `app/fonts.ts` (Rajdhani, Share Tech Mono, Pirata One, Crimson Pro, Press Start 2P, VT323), exposed as CSS variables and Tailwind families (`font-rajdhani`, `font-mono-tech`, `font-pirata`, `font-crimson`, `font-pixel`, `font-vt`). World-specific fonts have `preload: false`.
+- **Animations**: CSS keyframes (in `globals.css`) + small hooks (`use-in-view`, `use-count-up`, `use-typed-loop`). Always pair with `motion-reduce:` handling — every animation must respect `prefers-reduced-motion`.
+- **Sound**: `lib/sfx.ts` WebAudio synth — no audio files. Add hover sounds to any element via the `data-sfx-hover` attribute (handled globally by BridgeEffects).
+- **Navigation**: Internal links get the wipe transition automatically via PageVeil's capture-phase interception; imperative navigation goes through `navigateWithVeil(href)`.
 
 ## Adding Content
 
-All portfolio data lives in `constants/`:
-- `constants/index.ts` — Homepage info
-- `constants/projects/index.ts` — Project entries
-- `constants/experience/index.ts` — Work experience
-- `constants/about/index.ts` — Skill cards
-
-## Environment Variables
-
-- `RESUME_LINK` — Path to resume file (used in about page)
+Real data lives in `constants/` and themed copy derives from it:
+- `constants/index.ts` — Homepage info, featured stats
+- `constants/projects/index.ts` — Project entries (quests derive from these by name in `constants/quests.ts`)
+- `constants/experience/index.ts` — Work experience (voyage chapters reference entries by id in `constants/voyage.ts`)
+- `constants/about/index.ts` — Skill cards (inventory derives devicon URLs in `constants/character.ts`)
+- Per-world copy: `constants/{home,comms,terminal,voyage,captains-log,quests,battle,character,bridge}.ts`
 
 ## Deployment
 
 Deployed on Vercel. Vercel Speed Insights integrated.
+
+## Testing
+
+- **Vitest 4** + @testing-library/react (jsdom). Tests live in `test/`, run with `npm test`. See [TESTING.md](TESTING.md) for conventions.
+- 100% test coverage is the goal — tests make vibe coding safe.
+- When writing a new function, write a corresponding test. When fixing a bug, write a regression test.
+- When adding error handling, write a test that triggers the error. When adding a conditional, test BOTH paths.
+- Never commit code that makes existing tests fail.
 
 ## Skill routing
 
