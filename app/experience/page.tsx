@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import ScrollExperience from "@/components/experience/ScrollExperience";
-import { experience } from "@/constants/experience";
+import WorldShell from "@/components/bridge/WorldShell";
+import VoyageHeader from "@/components/voyage/VoyageHeader";
+import VoyageContent from "@/components/voyage/VoyageContent";
+import HorizonSection from "@/components/voyage/HorizonSection";
 
 export const metadata: Metadata = {
-  title: "Experience",
+  title: "The Voyage — Experience",
   description:
     "3+ years of professional software engineering experience — from founding engineer roles to building products used by thousands.",
   openGraph: {
@@ -26,12 +28,15 @@ const breadcrumbSchema = {
 
 export default function ExperiencePage() {
   return (
-    <>
+    <WorldShell world="sea">
       <JsonLd data={breadcrumbSchema} />
-      {/* Break out of the main layout padding for full-viewport scroll sections */}
-      <div className="-mt-6 w-screen overflow-x-clip ml-[calc(50%-50vw)]">
-        <ScrollExperience experiences={experience} />
-      </div>
-    </>
+      <div className="grain" aria-hidden="true" />
+      <div className="edge-burn" aria-hidden="true" />
+      <main className="relative z-[2] mx-auto max-w-[1100px] px-7 pt-[130px]">
+        <VoyageHeader />
+        <VoyageContent />
+        <HorizonSection />
+      </main>
+    </WorldShell>
   );
 }
