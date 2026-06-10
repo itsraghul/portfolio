@@ -34,12 +34,15 @@ export interface DestinationPort {
 
 /* ---------- voyage (experience) ---------- */
 
+export type CrewMarkId = "navigator" | "slayer" | "swordsman" | "emperor";
+
 export interface VoyageChapter {
     experienceId: number;
     ribbon: string;
     seaName: string;
     aliveLine: string;
-    mugLabel: string;
+    crewMark: CrewMarkId;
+    markCaption: string;
     epithet: string;
     bounty: number;
     crew: string;

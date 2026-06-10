@@ -1,5 +1,6 @@
 "use client";
 
+import CrewMark from "@/components/voyage/CrewMark";
 import { useCountUp } from "@/hooks/use-count-up";
 import { VoyageChapter } from "@/types/worlds";
 import { cn } from "@/lib/utils";
@@ -29,9 +30,12 @@ export default function WantedPoster({ chapter, tiltRight, revealed }: WantedPos
             />
             <h3 className="font-pirata text-[56px] font-normal leading-none tracking-[0.08em]">WANTED</h3>
             <div className="mt-1.5 font-mono-tech text-[11px] tracking-[0.42em] text-[var(--ink-soft)]">{chapter.aliveLine}</div>
-            <div className="mx-auto mt-[18px] grid aspect-[4/3.4] w-[78%] place-items-center border-2 border-[#9c7c45] bg-[repeating-linear-gradient(45deg,#e6d2a9_0_12px,#dfc89a_12px_24px)]">
-                <span className="bg-[rgba(243,230,200,.85)] px-2.5 py-1 font-mono-tech text-[11px] tracking-[0.12em] text-[#8a6f44]">
-                    {chapter.mugLabel}
+            <div className="relative mx-auto mt-[18px] grid aspect-[4/3.4] w-[78%] place-items-center overflow-hidden border-2 border-[#9c7c45] bg-[radial-gradient(ellipse_at_50%_42%,rgba(243,230,200,.9)_0%,rgba(243,230,200,0)_68%),repeating-linear-gradient(45deg,#e6d2a9_0_12px,#dfc89a_12px_24px)]">
+                <div className="h-[92%] w-[92%] [filter:drop-shadow(1px_2px_0_rgba(110,70,25,.18))]">
+                    <CrewMark id={chapter.crewMark} />
+                </div>
+                <span className="absolute bottom-1.5 left-0 right-0 text-center font-mono-tech text-[9.5px] tracking-[0.18em] text-[#8a6f44]">
+                    {chapter.markCaption}
                 </span>
             </div>
             <div className="mt-4 font-pirata text-[30px] font-normal tracking-[0.04em]">RAGHUL S</div>
