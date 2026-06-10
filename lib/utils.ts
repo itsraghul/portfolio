@@ -5,7 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+const MAX_STARS = 5;
 
-export const openLink = (url: string, target: string = "_blank") => {
-  window.open(url, target);
-} 
+/** RPG-style star rating, e.g. starRating(4) → "★★★★☆" */
+export function starRating(stars: number): string {
+  return "★".repeat(stars) + "☆".repeat(MAX_STARS - stars);
+}
