@@ -51,6 +51,30 @@ describe("useBattle", () => {
         expect(result.current.view.mp).toBe(INITIAL_BATTLE_STATS.mpMax); // +6 capped at max
     });
 
+    it("CACHE guards the next enemy hit at 35% damage", () => {
+        vi.spyOn(Math, "random").mockReturnValue(0); // enemy: NULL POINTER, 12 dmg -> guarded 4
+        const { result } = renderHook(() => useBattle(true));
+
+        act(() => result.current.doMove("cache"));
+        expect(result.current.view.message).toContain("cached everything");
+        act(() => void vi.advanceTimersByTime(1100));
+        expect(result.current.view.hHp).toBe(INITIAL_BATTLE_STATS.hMax - Math.floor(12 * 0.35));
+    });
+
+    it("defeats the enemy after enough REFACTORs and fanfares the win", () => {
+        vi.spyOn(Math, "random").mockReturnValue(0); // 18 dmg per hit, enemy hits 12
+        const { result } = renderHook(() => useBattle(true));
+
+        const hitsToWin = Math.ceil(INITIAL_BATTLE_STATS.eMax / 18); // 8
+        for (let i = 0; i < hitsToWin; i++) {
+            act(() => result.current.doMove("refactor"));
+            act(() => void vi.advanceTimersByTime(1600)); // hit + enemy turn / win delay
+        }
+        expect(result.current.view.eHp).toBeLessThanOrEqual(0);
+        expect(result.current.view.enemyState).toBe("dead");
+        expect(result.current.view.message).toContain("refactored into oblivion");
+    });
+
     it("ignores moves while a turn is in flight", () => {
         vi.spyOn(Math, "random").mockReturnValue(0);
         const { result } = renderHook(() => useBattle(true));

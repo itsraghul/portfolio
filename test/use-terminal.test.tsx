@@ -8,6 +8,7 @@ vi.mock("@/components/bridge/PageVeil", () => ({
 }));
 
 import { TermLine, useTerminal } from "@/hooks/use-terminal";
+import { onBridgeToast } from "@/lib/toast";
 
 const textOf = (line: TermLine) => line.segments.map((s) => s.text).join("");
 const allText = (lines: TermLine[]) => lines.map(textOf).join("\n");
@@ -66,6 +67,30 @@ describe("useTerminal", () => {
         const { result } = boot();
         act(() => result.current.run("clear"));
         expect(result.current.lines).toHaveLength(0);
+    });
+
+    it("echo prints its arguments verbatim", () => {
+        const { result } = boot();
+        act(() => result.current.run("echo yo ho ho"));
+        expect(allText(result.current.lines)).toContain("yo ho ho");
+    });
+
+    it("hidden treasure command toasts and points at the quest log", () => {
+        const toasts: string[] = [];
+        const unsubscribe = onBridgeToast(({ message }) => toasts.push(message));
+        const { result } = boot();
+        act(() => result.current.run("treasure"));
+        expect(allText(result.current.lines)).toContain("hidden command");
+        expect(toasts[0]).toContain("HIDDEN COMMAND FOUND");
+        unsubscribe();
+    });
+
+    it("gomugomu engages konami-mode", () => {
+        const { result } = boot();
+        act(() => result.current.run("gomugomu"));
+        expect(document.documentElement.classList.contains("konami-mode")).toBe(true);
+        document.documentElement.classList.remove("konami-mode");
+        document.body.classList.remove("konami-mode");
     });
 
     it("arrow history recalls previous commands", () => {

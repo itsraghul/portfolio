@@ -10,6 +10,7 @@ afterEach(() => {
 // jsdom lacks matchMedia — several hooks (reduced motion, veil) query it
 Object.defineProperty(window, "matchMedia", {
     writable: true,
+    configurable: true,
     value: vi.fn().mockImplementation((query: string) => ({
         matches: false,
         media: query,
@@ -34,5 +35,6 @@ class MockIntersectionObserver {
 }
 Object.defineProperty(window, "IntersectionObserver", {
     writable: true,
+    configurable: true,
     value: MockIntersectionObserver,
 });
