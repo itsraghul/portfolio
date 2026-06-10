@@ -2,13 +2,13 @@
 
 ## Content
 
-### Replace portrait placeholders with real photos
+### Replace wanted-poster mug placeholders with real photos
 
-**What:** Drop real photos into the wanted-poster mugs (experience page) and the captain's portrait (about page).
+**What:** Drop real photos into the wanted-poster mugs on the experience page.
 
-**Why:** The design intentionally shipped with striped placeholder frames ("azure intern portrait", "captain's portrait"). Real photos complete the worlds.
+**Why:** The design intentionally shipped with striped placeholder frames ("azure intern portrait" etc.). Real photos complete the world. The captain's portrait on /about already uses `public/images/profile-portrait.png` (v1.0.0.0).
 
-**Context:** Placeholders live in `components/voyage/WantedPoster.tsx` (the `mugLabel` frame) and `app/about/page.tsx` (the portrait circle). The design handoff explicitly listed this as a next step.
+**Context:** Placeholders live in `components/voyage/WantedPoster.tsx` (the `mugLabel` frame). The design handoff explicitly listed this as a next step.
 
 **Effort:** S
 **Priority:** P2
