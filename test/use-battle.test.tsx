@@ -75,6 +75,42 @@ describe("useBattle", () => {
         expect(result.current.view.message).toContain("refactored into oblivion");
     });
 
+    it("DEPLOY without MP refuses, keeps MP, and does not soft-lock", () => {
+        vi.spyOn(Math, "random").mockReturnValue(0.99); // deploys succeed (0.99 > fail chance)
+        const { result } = renderHook(() => useBattle(true));
+
+        act(() => result.current.doMove("deploy")); // 30 -> 18 MP
+        act(() => void vi.advanceTimersByTime(2000));
+        act(() => result.current.doMove("deploy")); // 18 -> 6 MP
+        act(() => void vi.advanceTimersByTime(2000));
+        act(() => result.current.doMove("deploy")); // 6 < 12 — refused
+        expect(result.current.view.message).toContain("Not enough MP");
+        expect(result.current.view.mp).toBe(6);
+
+        act(() => result.current.doMove("refactor")); // busy must have been released
+        act(() => void vi.advanceTimersByTime(400));
+        expect(result.current.view.message).toContain("REFACTOR");
+    });
+
+    it("hero faint restores HP/MP via git revert and battle continues", () => {
+        vi.spyOn(Math, "random").mockReturnValue(0.99); // enemy: 10,000-LINE FILE, 25 dmg -> guarded 8
+        const { result } = renderHook(() => useBattle(true));
+
+        // guarded chip damage: 8 HP per round, hero faints on round 13
+        for (let i = 0; i < 13; i++) {
+            act(() => result.current.doMove("cache"));
+            act(() => void vi.advanceTimersByTime(1500));
+        }
+        act(() => void vi.advanceTimersByTime(1000)); // respawn fires 900ms after the fatal hit
+        expect(result.current.view.message).toContain("git revert");
+        expect(result.current.view.hHp).toBe(INITIAL_BATTLE_STATS.hMax);
+        expect(result.current.view.mp).toBe(INITIAL_BATTLE_STATS.mpMax);
+
+        act(() => result.current.doMove("refactor")); // busy released after respawn
+        act(() => void vi.advanceTimersByTime(400));
+        expect(result.current.view.message).toContain("REFACTOR");
+    });
+
     it("ignores moves while a turn is in flight", () => {
         vi.spyOn(Math, "random").mockReturnValue(0);
         const { result } = renderHook(() => useBattle(true));

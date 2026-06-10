@@ -68,4 +68,22 @@ describe("PageVeil navigation interception", () => {
         vi.advanceTimersByTime(300);
         expect(push).toHaveBeenCalledWith("/skills");
     });
+
+    it("failsafe uncovers the veil if navigation never lands", () => {
+        const { container } = render(<PageVeil />);
+        act(() => void clickLink("/about"));
+        expect(container.querySelector(".bridge-veil")?.classList.contains("cover")).toBe(true);
+        // usePathname is mocked constant — simulates a stalled navigation
+        act(() => void vi.advanceTimersByTime(2600));
+        expect(container.querySelector(".bridge-veil")?.classList.contains("cover")).toBe(false);
+    });
+
+    it("ignores a second click while the veil is covering", () => {
+        render(<PageVeil />);
+        act(() => void clickLink("/about"));
+        act(() => void clickLink("/skills"));
+        vi.advanceTimersByTime(400);
+        expect(push).toHaveBeenCalledTimes(1);
+        expect(push).toHaveBeenCalledWith("/about");
+    });
 });

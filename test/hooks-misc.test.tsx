@@ -73,6 +73,39 @@ describe("useCountUp", () => {
     });
 });
 
+describe("reduced motion branches", () => {
+    beforeEach(() => {
+        vi.useFakeTimers();
+        vi.stubGlobal(
+            "matchMedia",
+            vi.fn().mockImplementation((query: string) => ({
+                matches: true,
+                media: query,
+                addEventListener: vi.fn(),
+                removeEventListener: vi.fn(),
+            }))
+        );
+    });
+    afterEach(() => {
+        vi.useRealTimers();
+        vi.unstubAllGlobals();
+    });
+
+    it("useCountUp jumps straight to the target", () => {
+        const { result } = renderHook(() => useCountUp(100, true));
+        act(() => void vi.advanceTimersByTime(50));
+        expect(result.current).toBe(100);
+    });
+
+    it("useTypedLoop renders the first phrase statically", () => {
+        const { result } = renderHook(() => useTypedLoop(SINGLE_PHRASE));
+        act(() => void vi.advanceTimersByTime(50));
+        expect(result.current).toBe("ABC");
+        act(() => void vi.advanceTimersByTime(5000)); // no typing loop scheduled
+        expect(result.current).toBe("ABC");
+    });
+});
+
 describe("useClock", () => {
     beforeEach(() => vi.useFakeTimers());
     afterEach(() => vi.useRealTimers());

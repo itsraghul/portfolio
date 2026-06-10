@@ -20,6 +20,9 @@ describe("useTerminal", () => {
     });
     afterEach(() => {
         vi.useRealTimers();
+        // gomugomu side effects must not leak into other tests even on failure
+        document.documentElement.classList.remove("konami-mode");
+        document.body.classList.remove("konami-mode");
     });
 
     function boot() {
@@ -89,8 +92,16 @@ describe("useTerminal", () => {
         const { result } = boot();
         act(() => result.current.run("gomugomu"));
         expect(document.documentElement.classList.contains("konami-mode")).toBe(true);
-        document.documentElement.classList.remove("konami-mode");
-        document.body.classList.remove("konami-mode");
+    });
+
+    it("cat constructor does not resolve prototype members", () => {
+        const { result } = boot();
+        act(() => result.current.run("cat constructor"));
+        expect(allText(result.current.lines)).toContain("No such file");
+        act(() => result.current.run("constructor"));
+        expect(allText(result.current.lines)).toContain("command not found");
+        act(() => void vi.advanceTimersByTime(700));
+        expect(navigateWithVeil).not.toHaveBeenCalled();
     });
 
     it("arrow history recalls previous commands", () => {
