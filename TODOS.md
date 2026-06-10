@@ -2,18 +2,6 @@
 
 ## Content
 
-### Replace wanted-poster mug placeholders with real photos
-
-**What:** Drop real photos into the wanted-poster mugs on the experience page.
-
-**Why:** The design intentionally shipped with striped placeholder frames ("azure intern portrait" etc.). Real photos complete the world. The captain's portrait on /about already uses `public/images/profile-portrait.png` (v1.0.0.0).
-
-**Context:** Placeholders live in `components/voyage/WantedPoster.tsx` (the `mugLabel` frame). The design handoff explicitly listed this as a next step.
-
-**Effort:** S
-**Priority:** P2
-**Depends on:** Photos from Raghul
-
 ## Infrastructure
 
 ### Pin devicon CDN to an exact version
@@ -53,3 +41,9 @@
 **Depends on:** None
 
 ## Completed
+
+### Replace wanted-poster mug placeholders
+
+**What:** The striped placeholder frames on the experience page's wanted posters were replaced with engraved straw-hat jolly-roger crew marks from the updated design handoff (`components/voyage/CrewMark.tsx`). The captain's portrait on /about uses `public/images/profile-portrait.png`.
+
+**Completed:** v1.0.0.0 (2026-06-10)
