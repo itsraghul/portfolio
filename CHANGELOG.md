@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0.1] - 2026-07-05
+
+### Added
+- **New quest: lockwarden** — the npm supply-chain security CLI joins the projects world as a 5-star TOOL quest ("LOCKWARDEN — THE SUPPLY-CHAIN WARD"), with GitHub and website links and four tech rewards.
+
 ## [1.0.0.0] - 2026-06-10
 
 ### Added
