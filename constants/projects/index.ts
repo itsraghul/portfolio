@@ -108,4 +108,20 @@ export const PROJECTS: Project[] = [
             "GDevelop5": "No-code game engine for Android build",
         },
     },
+    {
+        name: "lockwarden — npm Supply-Chain Security CLI",
+        stack: "TypeScript | Node.js | SARIF | SLSA Provenance",
+        description:
+            "A free, open-source, local-first CLI that audits what an npm dependency tree can execute — install scripts, native build hooks, AI-agent hooks, and IDE task files — and answers \"am I hit?\" in seconds during supply-chain incidents. Where traditional scanners ask \"is this package known-bad?\" (and lag behind attacks), lockwarden asks \"what can this tree execute, and what changed?\" — structural detection that works on day zero, before any advisory exists. Incident triage runs straight from the lockfile with no install or account; PR delta-scoring flags the execution surface a dependency bump introduced (new postinstall, added binding.gyp, 25x size jump); it scans vendored node_modules inside tarballs, zips, and Docker layers that registry-level scanners never see. Zero telemetry, zero backend — nothing leaves the machine, with an --offline mode that hard-fails on any network attempt for airgapped CI. 3 runtime dependencies (zero transitive) with custom tar and lockfile parsers, a unified resolution model across npm/yarn/pnpm lockfiles, SARIF output for the GitHub Security tab, and a fully automated SLSA-provenance release pipeline. TypeScript, 270+ tests, MIT.",
+        githubLink: "https://github.com/itsraghul/lockwarden",
+        websiteLink: "https://lockwarden.dev",
+        category: "tools",
+        featured: true,
+        techDescriptions: {
+            "TypeScript": "Core CLI, parsers & detection engine",
+            "Node.js": "Lockfile-only npx runtime, zero install",
+            "SARIF": "Findings into the GitHub Security tab",
+            "SLSA Provenance": "Signed, automated release pipeline",
+        },
+    },
 ];
