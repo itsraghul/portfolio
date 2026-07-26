@@ -24,6 +24,13 @@ const QUEST_THEMES: Array<{
     desc: string;
 }> = [
     {
+        match: "lockwarden",
+        fullTitle: "LOCKWARDEN — THE SUPPLY-CHAIN WARD",
+        stars: 5,
+        category: "tool",
+        desc: "A local-first CLI that audits what an npm dependency tree can execute — install scripts, native build hooks, AI-agent hooks, IDE task files — and answers \"am I hit?\" in seconds when a package is compromised. Structural detection that works on day zero: it flags the execution surface a dependency bump introduced, scans vendored node_modules inside tarballs and Docker layers, and never phones home. Zero telemetry, 3 runtime deps, 270+ tests. The ward that holds the gate before any advisory exists.",
+    },
+    {
         match: "Mock Data",
         fullTitle: "MOCK DATA — REALISTIC FAKE DATA FORGE",
         stars: 4,
@@ -78,13 +85,6 @@ const QUEST_THEMES: Array<{
         stars: 2,
         category: "game",
         desc: "An endless runner mobile game developed with GDevelop5. Dodge, run, repeat — built for Android.",
-    },
-    {
-        match: "lockwarden",
-        fullTitle: "LOCKWARDEN — THE SUPPLY-CHAIN WARD",
-        stars: 5,
-        category: "tool",
-        desc: "A local-first CLI that audits what an npm dependency tree can execute — install scripts, native build hooks, AI-agent hooks, IDE task files — and answers \"am I hit?\" in seconds when a package is compromised. Structural detection that works on day zero: it flags the execution surface a dependency bump introduced, scans vendored node_modules inside tarballs and Docker layers, and never phones home. Zero telemetry, 3 runtime deps, 270+ tests. The ward that holds the gate before any advisory exists.",
     },
 ];
 

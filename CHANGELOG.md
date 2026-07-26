@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0.2] - 2026-07-26
+
+### Changed
+- **lockwarden leads the quest log** — the npm supply-chain security CLI now sits at the top of the projects world's quest list (and is the default-selected quest) instead of the bottom.
+
 ## [1.0.0.1] - 2026-07-05
 
 ### Added
