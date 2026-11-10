@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0.3] - 2026-11-10
+
+### Added
+- **New quest: Coin-Op Corner** — a browser arcade of ten original retro games joins the projects world as a 4-star GAME quest ("COIN-OP CORNER — THE TEN-CABINET ARCADE"), second in the quest list, with a link to the live site and three tech rewards.
+
 ## [1.0.0.2] - 2026-07-26
 
 ### Changed
