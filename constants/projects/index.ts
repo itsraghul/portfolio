@@ -98,6 +98,19 @@ export const PROJECTS: Project[] = [
         },
     },
     {
+        name: "Coin-Op Corner - Retro Arcade Games in the Browser",
+        stack: "JavaScript | HTML5 Canvas | Web Audio API",
+        description: "A browser arcade of ten original games in classic arcade genres: a pseudo-3D motorbike combat racer, a carnival shooting gallery, a falling colour-match puzzle, a hidden-hazard logic puzzle, grow-the-snake, paddle and bricks, a fixed shooter with diving waves, top-down tank defence, a side-scrolling platformer and a maze chase. Every game draws hand-authored pixel art to a true half-resolution framebuffer scaled up with hard pixels, and all sound is synthesised at runtime, so the site ships with no image or audio files, no dependencies and no build step. A shared shell owns the game loop, pause, overlays, high scores, keyboard input and an on-screen touch gamepad, and each game plugs in through a small module contract.",
+        githubLink: "",
+        websiteLink: "",
+        category: "game",
+        techDescriptions: {
+            "JavaScript": "Vanilla ES modules, no framework or build",
+            "HTML5 Canvas": "Low-res framebuffer & pixel-art sprites",
+            "Web Audio API": "Every sound effect synthesised at runtime",
+        },
+    },
+    {
         name: "Cosmic Breakout- Endless Runner Mobile Game",
         stack: "GDevelop5",
         description: "A endless runner mobile game developed using GDevelop5.",

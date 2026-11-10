@@ -31,6 +31,13 @@ const QUEST_THEMES: Array<{
         desc: "A local-first CLI that audits what an npm dependency tree can execute — install scripts, native build hooks, AI-agent hooks, IDE task files — and answers \"am I hit?\" in seconds when a package is compromised. Structural detection that works on day zero: it flags the execution surface a dependency bump introduced, scans vendored node_modules inside tarballs and Docker layers, and never phones home. Zero telemetry, 3 runtime deps, 270+ tests. The ward that holds the gate before any advisory exists.",
     },
     {
+        match: "Coin-Op Corner",
+        fullTitle: "COIN-OP CORNER — THE TEN-CABINET ARCADE",
+        stars: 4,
+        category: "game",
+        desc: "A browser arcade of ten original games: a motorbike combat racer, a carnival shooting gallery, two puzzles, a serpent, a brick breaker, a space shooter, tank defence, a platformer and a maze chase. Hand-authored pixel art on a true low-resolution framebuffer, every sound synthesised on the spot, and not a single image, audio file or dependency in the pack. Insert coin, pick a cabinet, chase the high score.",
+    },
+    {
         match: "Mock Data",
         fullTitle: "MOCK DATA — REALISTIC FAKE DATA FORGE",
         stars: 4,
